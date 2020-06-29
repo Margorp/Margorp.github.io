@@ -1,2 +1,158 @@
-<?xml version="1.0" encoding="utf-8"?>
-<config/>
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:dl="download"
+  xmlns:sel="select"
+  xmlns:ser-html="search-html"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:add="add"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:prnl="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg="debug"
+>
+
+  <dbg:debug value="true"/>
+  <const:rc name="url" type="string" value="https://racing.hkjc.com/racing/Info/meeting/RaceCard/chinese/Local/20200627/ST/1"/>
+  
+  <dl:rc name="html" type="string" value="${url}"/>  
+  <rep:rc name="html" type="string" value="${html}" pattern="\n" replacement=""/>
+  <rep:rc name="html" type="string" value="${html}" pattern="\r" replacement=""/>
+
+  <ser-html:rc name="ser_html" type="string" value="${html}" search="馬名"/>
+  <rep:rc name="ser_html" type="string" value="${ser_html}" pattern="\n\n" replacement="\n"/>
+  <rep:rc name="ser_html" type="string" value="${ser_html}" pattern="\r\r" replacement="\r"/>
+  <prnl:rc name="prn" type="string" value="${ser_html}"/>
+
+  <dl:rc name="doc" type="html" value="${url}"/>
+
+  <const:rc name="xpath" type="string" value="//div[contains(@class,'raceNum')]//tr[1]//img"/>
+  <sel:rc name="imgs" type="html" value="${doc}" xpath="${xpath}" attr_name="src"/>  
+  <const:rc name="pattern" type="string" value="^[^\d]+(?'race_num'\d+)[^\d]+$"/>
+  <reg-fil:debug name="race_nums" type="string[]" value="${imgs}" pattern="${pattern}"/>
+  <reg-rep:debug name="race_nums" type="int[]" value="${race_nums}" pattern="${pattern}" replacement="${race_num}"/>
+  <dump:debug name="dump" type="int[]" value="${race_nums}"/>
+
+  <sel:rc name="caches" type="html" value="${doc}" xpath="//div[@id='racecard']//div[contains(@class,'rowDivLeft')]//table//td[1]/#text"/>
+  <for:rc name="i" type="int" from="0" to="${caches::Length-1}">
+    <var:rc name="cache" type="string" value="${caches[${i+1}]}"/>
+    <trim:rc name="cache" type="string" value="${cache}"/>
+    <prnl:rc name="prn" type="string" value="${i+1}: ${cache}"/>
+  </for:rc>
+  
+  <var:rc name="cache" type="string" value="${caches[1]}"/>
+  <trim:rc name="cache" type="string" value="${cache}"/>
+  <prnl:rc name="prn" type="string" value="${cache}"/>
+  <const:rc name="pattern" type="string" value="^第\s(?'race_num'\d+)\s場.*;(?'race_name'[^;]+)$"/>
+  <reg-rep:nc name="race_num" type="int" value="${cache}" pattern="${pattern}" replacement="${race_num}"/>
+  <prnl:rc name="prn" type="string" value="race_num: ${race_num}"/>
+  <reg-rep:nc name="race_name" type="string" value="${cache}" pattern="${pattern}" replacement="${race_name}"/>
+  <prnl:rc name="prn" type="string" value="race_name: ${race_name}"/>
+
+  <var:rc name="cache" type="string" value="${caches[4]}"/>
+  <trim:rc name="cache" type="string" value="${cache}"/>
+  <prnl:rc name="prn" type="string" value="${cache}"/>
+  
+  <const:rc name="pattern" type="string" value="^(?'year'\d+)&amp;#\d+;(?'month'\d+)&amp;#\d+;(?'day'\d+)&amp;#\d+;,&amp;#\d+;&amp;#\d+;&amp;#(?'week'\d+);,\s(?'venue'[^,]+),\s(?'start_time'.*)$"/>
+  <reg-rep:nc name="year" type="int" value="${cache}" pattern="${pattern}" replacement="${year}"/>
+  <prnl:rc name="prn" type="string" value="year: ${year}"/>
+  <reg-rep:nc name="month" type="int" value="${cache}" pattern="${pattern}" replacement="${month}"/>
+  <prnl:rc name="prn" type="string" value="month: ${month}"/>
+  <reg-rep:nc name="day" type="int" value="${cache}" pattern="${pattern}" replacement="${day}"/>
+  <prnl:rc name="prn" type="string" value="day: ${day}"/>
+  <reg-rep:nc name="week" type="int" value="${cache}" pattern="${pattern}" replacement="${week}"/>
+  <prnl:rc name="prn" type="string" value="week: ${week}"/>
+  <reg-rep:nc name="venue" type="string" value="${cache}" pattern="${pattern}" replacement="${venue}"/>
+  <prnl:rc name="prn" type="string" value="venue: ${venue}"/>
+  <reg-rep:nc name="start_time" type="string" value="${cache}" pattern="${pattern}" replacement="${start_time}"/>
+  <prnl:rc name="prn" type="string" value="start_time: ${start_time}"/>
+  
+  <var:rc name="cache" type="string" value="${caches[6]}"/>
+  <trim:rc name="cache" type="string" value="${cache}"/>
+  <prnl:rc name="prn" type="string" value="${cache}"/>  
+  <const:rc name="pattern" type="string" value="^(?'track'[^,]+)(,\s[^,]+&quot;(?'course'[^&quot;]+)&quot;[^,]+)?,\s(?'distance'\d+)米$"/>
+  <reg-rep:nc name="track" type="string" value="${cache}" pattern="${pattern}" replacement="${track}"/>
+  <prnl:rc name="prn" type="string" value="track: ${track}"/>
+  <reg-rep:nc name="course" type="string" value="${cache}" pattern="${pattern}" replacement="${course}"/>
+  <prnl:rc name="prn" type="string" value="course: ${course}"/>
+  <reg-rep:nc name="distance" type="string" value="${cache}" pattern="${pattern}" replacement="${distance}"/>
+  <prnl:rc name="prn" type="string" value="distance: ${distance}"/>
+
+  <var:rc name="cache" type="string" value="${caches[8]}"/>
+  <trim:rc name="cache" type="string" value="${cache}"/>
+  <prnl:rc name="prn" type="string" value="${cache}"/>
+  <const:rc name="pattern" type="string" value="^獎金:\s\$(?'money'[^\s]+)(,\s評分:(?'rating'[^,]+))?,\s(?'class'[^,]+)$"/>
+  <reg-rep:nc name="money" type="string" value="${cache}" pattern="${pattern}" replacement="${money}"/>
+  <prnl:rc name="prn" type="string" value="money: ${money}"/>
+  <reg-rep:nc name="rating" type="string" value="${cache}" pattern="${pattern}" replacement="${rating}"/>
+  <prnl:rc name="prn" type="string" value="rating: ${rating}"/>
+  <reg-rep:nc name="class" type="string" value="${cache}" pattern="${pattern}" replacement="${class}"/>
+  <prnl:rc name="prn" type="string" value="class: ${class}"/>
+
+  <const:rc name="colnames" type="string[]" value="[]"/>
+  <sel:rc name="tds" type="html" value="${doc}" xpath="//table[contains(@class,'draggable')]/tr[1]/td"/>
+  <for-each:rc name="td" type="string[]" value="${tds}">
+    <add:rc name="colnames" type="string" value="${td}"/>
+  </for-each:rc>
+  <dump:debug value="${colnames}"/>
+
+  <sel:rc name="trs" type="html" value="${doc}" xpath="//table[contains(@class,'draggable')]/tr"/>
+  <for:rc name="row" type="int" from="0" to="${trs::Length-1}">
+    <sel:rc name="tds" type="html" value="${doc}" xpath="//table[contains(@class,'draggable')]/tr[${row}+1]/td"/>
+    <for:rc name="col" type="int" from="2" to="2">
+      <sel:rc name="td" type="html" value="${doc}" xpath="//table[contains(@class,'draggable')]/tr[${row+1}]/td[${col+1}]"/>
+      <var:rc name="foo" type="string" value="(${row},${col})"/>
+      <prnl:rc value="${foo}: ${td}"/>
+    </for:rc>
+  </for:rc>
+
+  <sel:rc name="trs" type="html" value="${doc}" xpath="//div[@id='racecard']//table[1]/tr"/>
+  <var:rc name="num_trs" type="int" value="${trs::Length}"/>
+  <prnl:rc name="prn" type="string" value="num_trs: ${num_trs}"/>
+  <for:rc name="row" type="int" from="0" to="${num_trs-1}">
+    <prnl:rc name="prn" type="string" value="row: ${row}"/>
+    <sel:rc name="foo" type="html" value="${doc}" xpath="//div[@id='racecard']//table[1]/tr[${row+1}]"/>
+    <dump:debug value="${foo}"/>
+    <var:rc name="num_tds" type="int" value="${tds::Length}"/>
+    <prnl:rc name="prn" type="int" value="num_tds: ${num_tds}"/>
+
+    <for:rc name="col" type="int" from="0" to="${tds::Length}">
+      <sel:rc name="td" type="html" value="${doc}" xpath="//div[@id='racecard']//table[1]/tr[${row+1}]/td[${col+1}]"/>
+      <var:rc name="msg" type="string" value="(${row},${col}): ${td}"/>
+    </for:rc>
+  </for:rc>
+
+  <dump:debug name="prn" type="string[]" value="${tds}"/>
+  <sel:rc name="tds" type="html" value="${doc}" xpath="//table[contains(@class,'tableBorderBlue')]//tr[1]/td"/>
+
+  <const:rc name="colnames" type="string[]" value="[]"/>
+  <var:rc name="num_tds" type="int" value="${tds::Length}"/>
+  <prnl:rc name="prn" type="int" value="${num_tds}"/>
+
+  <for:rc name="col" type="int" from="5" to="${num_tds-1}">
+    <var:rc name="td" type="string" value="${tds[${col}]}"/>
+    <add:rc name="colnames" type="string" value="${col}: ${td}"/>
+  </for:rc>
+  <dump:debug name="dump" type="string[]" value="${colnames}"/>
+
+  <sel:rc name="trs" type="html" value="${doc}" xpath="//table[contains(@class,'tableBorderBlue')][1]/tr"/>
+  <var:rc name="num_trs" type="int" value="${trs::Length}"/>
+  <prnl:rc name="prn" type="int" value="${num_trs}"/>
+  <for:rc name="row" type="int" from="0" to="${num_trs-1}">
+    <sel:rc name="tds" type="html" value="${doc}" xpath="//table[contains(@class,'tableBorderBlue')][1]/tr[${row+1}]/td"/>
+    <var:rc name="num_tds" type="int" value="${tds::Length}"/>
+    <prnl:rc name="prn" type="int" value="${num_tds}"/>
+    <for:rc name="col" type="int" from="0" to="${num_tds-1}">
+      <prnl:rc name="prn" type="string" value="(${row}, ${col})"/>
+
+      <sel:rc name="td" type="html" value="${doc}" xpath="//table[contains(@class,'tableBorderBlue')][1]/tr[${row+1}]/td[${col+1}]"/>
+      <prnl:rc name="print" type="string" value="${td}"/>
+    </for:rc>
+  </for:rc>
+
+</config>
