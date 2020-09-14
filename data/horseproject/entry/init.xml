@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:bln="bool"
+  xmlns:obj="object"
+  xmlns:dt="datetime"
+  xmlns:ts="timespan"
+  xmlns:var="variable"
+  xmlns:const="constant"
+  xmlns:env="environment"
+  xmlns:xm="xml"
+  xmlns:html="html"
+  xmlns:id="id"
+  xmlns:db="database"
+  xmlns:dl-async="download-async"
+  xmlns:sel-ex="select-exists"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:ins="insert"
+  xmlns:scp-call="script-call"
+  xmlns:scp-set="script-set"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:prn-line="print-line"
+  xmlns:doc-save="document-save"
+  xmlns:brk="break"
+  xmlns:query="query"
+  xmlns:dump="dump"
+  xmlns:dbg-prn="debug-print"
+>
+  <dbg-mode:test bln:val="true" />
+
+  <scp-set:getmeetings_script xm:val="getmeetings.xml"/>
+  <scp-set:getmeetingurl_script xm:val="getmeetingurl.xml"/>
+  <scp-set:getraces_script xm:val="getraces.xml"/>
+  <scp-set:getraceurl_script xm:val="getraceurl.xml"/>
+  <scp-set:getracepath_script xm:val="getracepath.xml"/>
+  <scp-set:meeting_script xm:val="meeting.xml"/>
+  <scp-set:race_script xm:val="race.xml"/>
+  <scp-set:horse_script xm:val="horse.xml"/>
+
+  <const:url str:val="https://racing.hkjc.com/racing/information/Chinese/racing/Entries.aspx"/>  
+
+  <dl-async:doc html:val="${url}" id:find="mainContainer">
+
+    <sel-ex:found html:val="${doc}" str:xpath="//div[contains(@class,'date_title')]//a"/>
+    <if:_ bln:val="${found==true}">
+      <then>
+        <scp-call:_ xm:val="${getmeetings_script}"/>
+        <for-each:meeting_info obj:val="${meeting_infos}">
+          <!--<dump:_ obj:val="${meeting_info}"/>-->
+          <var:meeting i:val="${meeting_info[meeting]}"/>
+          <var:date dt:val="${meeting_info[date]}"/>
+          <var:venue str:val="${meeting_info[venue]}"/>
+          <dbg-prn:test2 val="${meeting}"/>
+          <dbg-prn:test2 val="${date}"/>
+          <dbg-prn:test2 val="${venue}"/>
+
+          <scp-call:_ xm:val="${getmeetingurl_script}"/>
+          <prn-line:_ str:val="${url}"/>
+
+          <dl-async:doc html:val="${url}" id:find="mainContainer">
+            <scp-call:_ xm:val="${getraces_script}"/>
+            <for-each:url_info val="${url_infos}">
+              <dump:_ obj:val="${url_info}"/>
+              <scp-call:_ xm:val="${getraceurl_script}"/>
+              <scp-call:_ xm:val="${getracepath_script}"/>
+
+              <dump:_ str:val="${race_url}"/>
+              <dump:_ str:val="${race_path}"/>
+
+              <dl-async:html str:val="${race_url}" timeout="0:0:10">
+                <!--
+                <dump:_ val="${html}"/>
+                <brk:_/>
+                -->
+                <doc-save:_ str:val="${html}" path="${race_path}" overwrite="false"/>
+              </dl-async:html>
+
+              <!--
+              -->
+
+              <!--
+              <dl-async:doc html:val="${url_info[url]}" id:find="mainContainer">
+                <doc-save:_ html:val="${doc}" path="${race_path}" overwrite="false"/>
+              </dl-async:doc>
+              -->
+            </for-each:url_info>
+          </dl-async:doc>
+
+          <!--
+          <prn-line:_ obj:val="${meeting_info}"/>
+          <scp-call:_ xm:val="${getracepath_script}"/>
+          <prn-line:_ str:val="${path}"/>
+
+          <doc-save:_ html:val="${doc}" path="${path}"/>-->
+        </for-each:meeting_info>
+      </then>
+    </if:_>
+  </dl-async:doc>
+</config>
