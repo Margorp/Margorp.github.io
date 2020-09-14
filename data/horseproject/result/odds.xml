@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:bln="bool"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:i_s="int[]"
+  xmlns:str_s="string[]"
+  xmlns:obj_s="object[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:node_s="node[]"
+  xmlns:id="id"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:tmp="template"
+  xmlns:env="environment"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:ren="rename"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:join="join"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:add="add"
+  xmlns:prn="print"
+  xmlns:prn-line="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dbg-asr-eq="debug-assert-equal"
+  xmlns:pau="pause"
+>
+  <const:colnames obj:val="[]"/>
+  <sel:caches html:val="${doc}" str_s:xpath="//div[contains(@class,'dividend_tab')]/table/thead/tr[2]/td"/>
+  <for-each:cache val="${caches}">
+    <add:colnames str:val="${cache}"/>
+  </for-each:cache>
+
+  <var:race i:val="${meeting}${race_num:D2}"/>
+
+  <const:combination_info val="{}"/>
+  <const:dividend_info val="{}"/>
+
+  <add:combination_info val="${meeting}" key="meeting"/>
+  <add:combination_info val="${race}" key="race"/>
+
+  <add:dividend_info val="${meeting}" key="meeting"/>
+  <add:dividend_info val="${race}" key="race"/>
+
+  <sel:trs html:val="${doc}" str_s:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr"/>
+  <for:row i:from="0" i:to="${trs::Length-1}">
+    <sel:tds html:val="${doc}" str_s:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td"/>
+    <var:num_tds val="${tds::Length}"/>
+    <if:_ bln:val="${num_tds==3}">
+      <then>
+        <if:_ bln:val="${row>0}">
+          <then>
+            <add:combination_info val="${combinations}" key="${name}"/>
+            <add:dividend_info val="${dividends}" key="${name}"/>
+          </then>
+        </if:_>
+
+        <sel:name html:val="${doc}" str:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td[1]"/>
+        <sel:combination html:val="${doc}" str:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td[2]"/>
+        <sel:dividend html:val="${doc}" str:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td[3]"/>
+        <var:combinations obj:val="[]"/>
+        <add:combinations obj:val="${combination}"/>
+        <var:dividends obj:val="[]"/>
+        <add:dividends obj:val="${dividend}"/>
+      </then>
+      <else>
+        <sel:combination html:val="${doc}" str:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td[1]"/>
+        <sel:dividend html:val="${doc}" str:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td[2]"/>
+
+        <if:_ val="${combination==&amp;nbsp;}">
+          <then>
+          </then>
+          <else>
+            <add:combinations val="${combination}"/>
+            <add:dividends val="${dividend}"/>
+          </else>
+        </if:_>
+      </else>
+    </if:_>
+    <!--
+    <for:col i:from="0" i:to="${tds::Length-1}">
+      <sel:td html:val="${doc}" str_s:xpath="//div[contains(@class,'dividend_tab')]/table/tbody/tr[${row+1}]/td[${col+1}]"/>
+      <dump:_ val="${td}"/>
+    </for:col>
+    -->
+  </for:row>
+  <add:combination_info val="${combinations}" key="${name}"/>
+  <add:dividend_info val="${dividends}" key="${name}"/>
+
+  <!--
+  <dump:_ val="${combination_info}"/>
+  <dump:_ val="${dividend_info}"/>
+  -->
+</config>
