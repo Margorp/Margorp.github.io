@@ -29,11 +29,13 @@
 >
   <dbg-mode:test bln:val="true" />
 
-  <scp-set:getraceurl_script xm:val="getraceurl.xml"/>
-  <scp-set:getracepath_script xm:val="getracepath.xml"/>
-  <scp-set:meeting_script xm:val="meeting.xml"/>
-  <scp-set:race_script xm:val="race.xml"/>
-  <scp-set:horse_script xm:val="horse.xml"/>
+  <const:host str:val="https://raw.githubusercontent.com/Margorp/Margorp.github.io/master/data/horseproject/racecard/"/>
+  
+  <scp-set:getraceurl_script xm:val="${host}getraceurl.xml"/>
+  <scp-set:getracepath_script xm:val="${host}getracepath.xml"/>
+  <scp-set:meeting_script xm:val="${host}meeting.xml"/>
+  <scp-set:race_script xm:val="${host}race.xml"/>
+  <scp-set:horse_script xm:val="${host}horse.xml"/>
 
   <const:url str:val="https://racing.hkjc.com/racing/information/Chinese/racing/RaceCard.aspx"/>
     
@@ -44,12 +46,10 @@
         <scp-call:_ xm:val="${meeting_script}"/>
         <for-each:race_num i:val="${race_nums}">
           <prn-line:_ str:val="${race_num}"/>
-          <!--
-          <const:race_num i:val="2i"/>
-          -->
 
           <scp-call:_ xm:val="${getraceurl_script}"/>
           <prn-line:_ str:val="${url}"/>
+          
           <scp-call:_ xm:val="${getracepath_script}"/>
           <prn-line:_ str:val="${path}"/>
 
@@ -83,20 +83,8 @@
 
         </for-each:race_num>
 
-        <!--
-        <brk:_ bln:val="false"/>
-        <brk:_/>
-        -->
       </then>
     </if:_>
   </dl-async:doc>
-
-  <!--
-  <const:url str:val="https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=2020/07/12&amp;Racecourse=ST&amp;RaceNo=1"/>
-  <dl-async:doc html:val="${url}" id:find="mainContainer">
-    <scp-call:_ xm:val="${meeting_script}"/>
-    <scp-call:_ xm:val="${race_script}"/>
-    <scp-call:_ xm:val="${horse_script}"/>
-  </dl-async:doc>
-  -->
+  
 </config>
