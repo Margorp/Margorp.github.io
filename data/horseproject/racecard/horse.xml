@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:dbl="double"
+  xmlns:bln="bool"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:i_s="int[]"
+  xmlns:str_s="string[]"
+  xmlns:dbl_s="double[]"
+  xmlns:obj_s="object[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:node_s="node[]"
+  xmlns:id="id"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:tmp="template"
+  xmlns:env="environment"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:sel-ex="select-exists"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:ren="rename"
+  xmlns:add="add"
+  xmlns:prn="print"
+  xmlns:prn-line="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dbg-asr-eq="debug-assert-equal"
+  xmlns:pau="pause"
+  xmlns:time2sec="time-to-second"
+  xmlns:fact2dbl="faction-to-double"
+  xmlns:order="order"
+  xmlns:ref="reference"
+>
+
+  <const:horse_infos obj:val="[]"/>
+
+  <sel:caches html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//thead/tr/td"/>
+  <var:colnames str_s:val="${caches}"/>
+
+  <sel:trs html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr"/>
+  <for:i i:from="0" i:to="${trs::Length-1}">
+    <const:horse_info obj:val="{}"/>
+    <add:horse_info i:val="${meeting}" key="meeting"/>
+    <add:horse_info i:val="${race}" key="race"/>
+
+    <sel:tds html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td"/>
+    <for:j i:from="0" i:to="${tds::Length-1}">
+      <var:colname str:val="${colnames[${j}]}"/>
+      <if:_ bln:val="${colname==馬名}">
+        <then>
+          <trim:td str:val="${tds[${j}]}"/>
+          <reg-rep:td str:val="${td}" pattern="^\((?'brand_num'.*)\)$" replacement="${brand_num}"/>
+          <dbg-prn:test str:val="烙號: ${td}"/>
+          <var:record str:val="${race}${td}"/>
+          <add:horse_info str:val="${record}" key="record"/>
+          <add:horse_info obj:val="${td}" key="烙號"/>
+          <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/a"/>
+          <add:horse_info str:val="${td}${horse_info[烙號]}" key="馬名烙號"/>
+        </then>
+        <else>
+          <if:_ bln:val="${colname==騎師}">
+            <then>
+              <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]"/>
+              <trim:td val="${td}"/>
+            </then>
+            <else>
+              <if:_ bln:val="${colname==練馬師}">
+                <then>
+                  <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]"/>
+                  <trim:td val="${td}"/>
+                </then>
+                <else>
+                  <if:_ bln:val="${colname==沿途走位}">
+                    <then>
+                      <const:run_pos obj_s:val="[]"/>
+                      <sel-ex:found html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div"/>
+                      <dbg-prn:test bln:val="${found}"/>
+                      <if:_ bln:val="${found==true}">
+                        <then>
+                          <sel:divs html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div"/>
+                          <!--
+                            <dbg-prn:test obj:val="${divs}"/>
+                            -->
+                          <dbg-prn:test obj:val="${divs::Length-1}"/>
+                          <for:k i:from="0" i:to="${divs::Length-1}">
+                            <dbg-prn:test obj:val="${k}"/>
+                            <sel:div html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div[${k+1}]"/>
+                            <trim:div str:val="${div}"/>
+                            <add:run_pos obj:val="${div}"/>
+                          </for:k>
+                        </then>
+                        <else>
+                        </else>
+                      </if:_>
+                      <var:td obj_s:val="${run_pos}"/>
+
+                      <!--
+                        <const:run_pos str_s:val="[]"/>
+                        <sel:divs html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div"/>
+                        <for:k i:from="0" i:to="${divs::Length-1}">
+                          <sel:div html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div[${k+1}]"/>
+                          <trim:div str:val="${div}"/>
+                          <add:run_pos str:val="${div}"/>
+                        </for:k>
+                        <var:td str_s:val="${run_pos}"/>
+                      -->
+                    </then>
+                    <else>
+                      <trim:td str:val="${tds[${j}]}"/>
+                    </else>
+                  </if:_>
+                </else>
+              </if:_>
+            </else>
+          </if:_>
+        </else>
+      </if:_>
+      <dbg-prn:test str:val="${colname}: ${td}"/>
+      <add:horse_info obj:val="${td}" key="${colname}"/>
+      <!--
+      <dump:_ obj:val="${horse_info}"/>
+      -->
+    </for:j>
+
+    <var:temp i:val="${horse_info[名次]}"/>
+    <if:_ val="${temp==0}">
+      <then>
+        <ren:horse_info obj:val="{
+            名次:意外
+            }"/>
+      </then>
+      <else>
+        <add:horse_info val="${temp}" key="名次"/>
+      </else>
+    </if:_>
+
+    <var:temp i:val="${horse_info[馬號]}"/>
+    <add:horse_info val="${temp}" key="馬號"/>
+
+    <var:temp i:val="${horse_info[實際負磅]}"/>
+    <add:horse_info val="${temp}" key="實際負磅"/>
+        
+    <var:temp i:val="${horse_info[排位體重]}"/>
+    <add:horse_info val="${temp}" key="排位體重"/>
+    
+    <var:temp i:val="${horse_info[檔位]}"/>
+    <add:horse_info val="${temp}" key="檔位"/>
+
+    <var:temp dbl:val="${horse_info[獨贏賠率]}"/>
+    <add:horse_info val="${temp}" key="獨贏賠率"/>
+    <add:horse_info val="${temp}" key="獨贏排序"/>
+      <!--
+      <add:horse_info obj:val="${horse_info[名次]}" key="意外"/>
+      <add:horse_info obj:val="${horse_info[頭馬距離]}" key="原頭馬距離"/>
+      -->
+
+    <var:temp str:val="${horse_info[完成時間]}"/>
+    <time2sec:temp str:val="${temp}"/>
+    <add:horse_info val="${temp}" key="完成時間"/>
+
+    <ren:horse_info obj:val="{
+        頭馬距離:原頭馬距離
+        }"/>
+
+    <var:temp str:val="${horse_info[原頭馬距離]}"/>
+    <fact2dbl:temp str:val="${temp}"/>
+    <add:horse_info val="${temp}" key="頭馬距離"/>
+
+    <add:horse_infos obj:val="${horse_info}"/>
+  </for:i>
+
+  <const:odds obj:val="[]"/>
+  <for:i i:from="0" i:to="${horse_infos::Length-1}">
+    <add:odds obj:val="${horse_infos[${i}][獨贏賠率]}"/>
+  </for:i>
+  <order:odds_order dbl:val="${odds}"/>
+
+  <for:i i:from="0" i:to="${odds_order::Length-1}">
+    <var:temp obj:val="${odds_order[${i}]}"/>
+    <ref:horse_infos val="${temp}" index="${i}" key="獨贏排序"/>
+  </for:i>
+  <!--
+  -->
+  <dump:_ obj_s:val="${horse_infos}"/>
+  <!--
+  -->
+</config>
