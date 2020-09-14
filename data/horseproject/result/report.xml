@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:bln="bool"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:i_s="int[]"
+  xmlns:str_s="string[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:node_s="node[]"
+  xmlns:id="id"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:tmp="template"
+  xmlns:env="environment"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:add="add"
+  xmlns:prn="print"
+  xmlns:prn-line="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dbg-asr-eq="debug-assert-equal"
+  xmlns:pau="pause"
+>
+
+  <var:race i:val="${meeting}${race_num:D2}"/>
+  <sel:cache html:val="${doc}" str:xpath="//div[@class='race_incident_report']/p[2]"/>
+  <var:report str:val="${cache}"/>
+  <dbg-prn:test str:val="${report}"/>
+
+  <const:report_info obj:val="{}"/>
+
+  <add:report_info i:val="${meeting}" key="meeting"/>
+  <add:report_info i:val="${race}" key="race"/>
+  <add:report_info i:val="${race_num}" key="race_num"/>
+  <add:report_info str:val="${report}" key="report"/>
+
+  <!--
+  <dump:_ obj:val="${report_info}"/>
+  -->
+
+</config>
