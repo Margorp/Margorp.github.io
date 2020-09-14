@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:str_s="string[]"
+  xmlns:bln="bool"
+  xmlns:i="int"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:xm="xml"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:id="id"
+  xmlns:reader="reader"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:env="environment"
+  xmlns:db="database"
+  xmlns:sel="select"
+  xmlns:sel-ex="select-exists"
+  xmlns:for-each="for-each"
+  xmlns:add="add"
+  xmlns:dl-async="download-async"
+  xmlns:reg-rep="regex-replace"
+  xmlns:rep="replace"
+  xmlns:for="for"
+  xmlns:scp-call="script-call"
+  xmlns:scp-set="script-set"
+  xmlns:prn-line="print-line"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dump="dump"
+>
+  <const:url_infos val="[]"/>
+  <const:host str:val="https://racing.hkjc.com"/>
+  <const:meeting_infos obj:val="[]"/>
+
+  <sel:divs html:val="${doc}" str_s:xpath="//div[@class='margin_top5']//div"/>
+  <for:i i:from="0" i:to="${divs::Length-1}">
+    <const:url_info obj:val="{}"/>
+    <sel:href html:val="${doc}" attr:xpath="//div[@class='margin_top5']//div[${i+1}]/ul/li/span[2]/a" attr="href"/>
+    <reg-rep:race_url val="${href}" pattern="^.*'(?'url'.*)'.*$" replacement="${url}"/>
+    <dump:_ val="${race_url}"/>
+    <var:race_url str:val="${host}${race_url}"/>
+    <reg-rep:venue val="${race_url}" pattern="^.*Racecourse=(?'venue'.*)&amp;amp;View=Section&amp;amp;SectionNo=(?'section'.*)&amp;amp;ProvRaceNo=(?'race_num'.*)$" replacement="${venue}"/>
+    <reg-rep:section val="${race_url}" pattern="^.*Racecourse=(?'venue'.*)&amp;amp;View=Section&amp;amp;SectionNo=(?'section'.*)&amp;amp;ProvRaceNo=(?'race_num'.*)$" replacement="${section}"/>
+    <reg-rep:race_num val="${race_url}" pattern="^.*Racecourse=(?'venue'.*)&amp;amp;View=Section&amp;amp;SectionNo=(?'section'.*)&amp;amp;ProvRaceNo=(?'race_num'.*)$" replacement="${race_num}"/>
+    <add:url_info str:val="${race_url}" key="url"/>
+    <add:url_info str:val="${venue}" key="venue"/>
+    <add:url_info str:val="${section}" key="section"/>
+    <add:url_info str:val="${race_num}" key="race_num"/>
+    <add:url_infos obj:val="${url_info}"/>
+  </for:i>
+  <!--
+  <dump:_ obj:val="${url_infos}"/>
+  -->
+
+</config>
