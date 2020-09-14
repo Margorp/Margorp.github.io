@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:bln="bool"
+  xmlns:i="int"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:const="constant"
+  xmlns:xm="xml"
+  xmlns:html="html"
+  xmlns:id="id"
+  xmlns:reader="reader"
+  xmlns:var="variable"
+  xmlns:env="environment"
+  xmlns:db="database"
+  xmlns:add="add"
+  xmlns:dl-async="download-async"
+  xmlns:reg-rep="regex-replace"
+  xmlns:for="for"
+  xmlns:scp-call="script-call"
+  xmlns:scp-set="script-set"
+  xmlns:prn-line="print-line"
+  xmlns:dbg-mode="debug-mode"
+>
+  
+  <var:year i:val="${date::Year}"/>
+  <var:month i:val="${date::Month}"/>
+  <var:day i:val="${date::Day}"/>
+  <var:venue str:val="${url_info[venue]}"/>
+  <var:section str:val="${url_info[section]}"/>
+  <var:race_num str:val="${url_info[race_num]}"/>
+
+  <var:race_url str:val="https://racing.hkjc.com/racing/information/chinese/Racing/Entries.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&amp;Racecourse=${venue}&amp;View=Section&amp;SectionNo=${section}&amp;ProvRaceNo=${race_num}"/>
+</config>
