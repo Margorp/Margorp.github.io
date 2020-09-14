@@ -31,11 +31,12 @@
 >
   <dbg-mode:test bln:val="true" />
 
-  <scp-set:getmeetings_script xm:val="getmeetings.xml"/>
-  <scp-set:getmeetingurl_script xm:val="getmeetingurl.xml"/>
-  <scp-set:getraces_script xm:val="getraces.xml"/>
-  <scp-set:getraceurl_script xm:val="getraceurl.xml"/>
-  <scp-set:getracepath_script xm:val="getracepath.xml"/>
+  <const:host str:val="https://raw.githubusercontent.com/Margorp/Margorp.github.io/master/data/horseproject/entry/"/>
+  <scp-set:getmeetings_script xm:val="${host}getmeetings.xml"/>
+  <scp-set:getmeetingurl_script xm:val="${host}getmeetingurl.xml"/>
+  <scp-set:getraces_script xm:val="${host}getraces.xml"/>
+  <scp-set:getraceurl_script xm:val="${host}getraceurl.xml"/>
+  <scp-set:getracepath_script xm:val="${host}getracepath.xml"/>
   <!--
   <scp-set:meeting_script xm:val="meeting.xml"/>
   <scp-set:race_script xm:val="race.xml"/>
