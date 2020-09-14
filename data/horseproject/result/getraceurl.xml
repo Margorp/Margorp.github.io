@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:bln="bool"
+  xmlns:i="int"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:const="constant"
+  xmlns:xm="xml"
+  xmlns:html="html"
+  xmlns:id="id"
+  xmlns:reader="reader"
+  xmlns:var="variable"
+  xmlns:env="environment"
+  xmlns:db="database"
+  xmlns:add="add"
+  xmlns:dl-async="download-async"
+  xmlns:reg-rep="regex-replace"
+  xmlns:for="for"
+  xmlns:scp-call="script-call"
+  xmlns:scp-set="script-set"
+  xmlns:prn-line="print-line"
+  xmlns:dbg-mode="debug-mode"
+>
+
+  <var:str_meeting str:val="${meeting}"/>
+  <reg-rep:year i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${year}"/>
+  <reg-rep:month i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${month}"/>
+  <reg-rep:day i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${day}"/>
+  <var:last_date dt:val="${year}/${month}/${day}"/>
+  <var:race_url str:val="https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&amp;Racecourse=${venue}&amp;RaceNo=${race_num}"/>
+
+</config>
