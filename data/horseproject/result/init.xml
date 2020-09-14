@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:bln="bool"
+  xmlns:obj="object"
+  xmlns:dt="datetime"
+  xmlns:auto="auto"
+  xmlns:var="variable"
+  xmlns:const="constant"
+  xmlns:env="environment"
+  xmlns:xm="xml"
+  xmlns:html="html"
+  xmlns:id="id"
+  xmlns:str_s="string[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:db="database"
+  xmlns:dl-async="download-async"
+  xmlns:sel-ex="select-exists"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:ins="insert"
+  xmlns:scp-call="script-call"
+  xmlns:scp-set="script-set"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:prn-line="print-line"
+  xmlns:brk="break"
+  xmlns:query="query"
+  xmlns:dump="dump"
+  xmlns:chrome="chrome"
+  xmlns:open="open"
+  xmlns:close="close"
+  xmlns:doc-load="document-load"
+  xmlns:doc-save="document-save"
+  xmlns:cont="continue"
+  xmlns:pau="pause"
+>
+  <dbg-mode:test bln:val="false" />
+  <chrome:_ open:val=''/>
+
+  <scp-set:lastmeeting_script xm:val="lastmeeting.xml"/>
+  <scp-set:getmeetingurl_script xm:val="getmeetingurl.xml"/>
+  <scp-set:getraceurl_script xm:val="getraceurl.xml"/>
+  <scp-set:getracepath_script xm:val="getracepath.xml"/>
+  <scp-set:meeting_script xm:val="meeting.xml"/>
+  <scp-set:race_script xm:val="race.xml"/>
+  <scp-set:report_script xm:val="report.xml"/>
+  <scp-set:horse_script xm:val="horse.xml"/>
+  <scp-set:odds_script xm:val="odds.xml"/>
+
+  <const:meeting_tblname val="result.meeting"/>
+  <const:race_tblname val="result.race"/>
+  <const:report_tblname val="result.report"/>
+  <const:horse_tblname val="result.horse"/>
+  <const:combination_tblname val="result.combination"/>
+  <const:dividend_tblname val="result.dividend"/>
+
+  <scp-call:_ xm:val="${lastmeeting_script}"/>
+  <scp-call:_ xm:val="${getmeetingurl_script}"/>
+  <env:now dt:val="${now}"/>
+
+  <const:meetings obj:val="[]"/>
+
+  <const:last_date dt:val="#2020/09/05#"/>
+  <const:now dt:val="#2020/09/07#"/>
+  <!--
+  -->
+
+  <!--
+  <const:last_date2 dt:val="#1979/09/28#"/>
+  <const:now2 dt:val="#2020/07/16#"/>
+  -->
+
+  <for:date dt:from="${last_date+1}" dt:to="${now}">
+
+    <var:meeting i:val="${date::Year:D4}${date::Month:D2}${date::Day:D2}"/>
+    <scp-call:_ xm:val="${getmeetingurl_script}"/>
+
+    <dl-async:doc html:val="${url}" id:find="mainContainer">
+      <sel-ex:found html:val="${doc}" str:xpath="//table[contains(@class,'js_racecard')]//img"/>
+      <if:_ bln:val="${found==true}">
+        <then>
+          <prn-line:_ val="date: ${date}"/>
+          <scp-call:_ xm:val="${meeting_script}"/>
+
+          <for-each:race_num i:val="${race_nums}">
+            <!--
+            <const:race_num i:val="2i"/>
+            -->
+
+            <scp-call:_ xm:val="${getraceurl_script}"/>
+            <scp-call:_ xm:val="${getracepath_script}"/>
+
+            <prn-line:_ str:val="${race_url}"/>
+            <prn-line:_ str:val="${race_path}"/>
+
+            <dl-async:html str:val="${race_url}" id:find="mainContainer">
+              <doc-save:_ str:val="${html}" path="${race_path}" overwrite="false"/>
+
+              <doc-load:doc auto:val="${html}"/>
+
+              <scp-call:_ xm:val="${meeting_script}"/>
+              <scp-call:_ xm:val="${race_script}"/>
+              <scp-call:_ xm:val="${horse_script}"/>
+              <scp-call:_ xm:val="${report_script}"/>
+              <scp-call:_ xm:val="${odds_script}"/>
+
+              <if:_ val="${race_num==1}">
+                <then>
+                  <db:meeting_tblname ins:val="${meeting_info}" table="result.meeting"/>
+                </then>
+              </if:_>
+              <db:race_tblname ins:val="${race_info}" table="result.race"/>
+              <db:report_tblname ins:val="${report_info}" table="result.report"/>
+              <db:horse_tblname ins:val="${horse_infos}" table="result.horse"/>
+              <db:combination_tblname ins:val="${combination_info}" table="result.combination"/>
+              <db:dividend_tblname ins:val="${dividend_info}" table="result.dividend"/>
+              
+            </dl-async:html>
+
+          </for-each:race_num>
+
+        </then>
+      </if:_>
+    </dl-async:doc>
+
+  </for:date>
+
+  <chrome:_ close:val=''/>
+
+</config>
