@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:bln="bool"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:i_s="int[]"
+  xmlns:str_s="string[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:node_s="node[]"
+  xmlns:id="id"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:tmp="template"
+  xmlns:env="environment"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:add="add"
+  xmlns:prn="print"
+  xmlns:prn-line="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dbg-asr-eq="debug-assert-equal"
+  xmlns:pau="pause"
+>
+
+    <const:meeting_info obj:val="{}"/>
+
+    <sel:srcs html:val="${doc}" attr_s:xpath="//table[contains(@class,'js_racecard')]//img" str_s:attr="src"/>
+    <reg-fil:srcs str_s:val="${srcs}" pattern="^[^\d]+(?'num'\d+)[^\d]+$"/>
+    <reg-rep:race_nums i_s:val="${srcs}" pattern="^[^\d]+(?'num'\d+)[^\d]+$" replacement="${num}"/>
+    <dbg-prn:test str_s:val="${race_nums}"/>
+
+    <sel:cache html:val="${doc}" str:xpath="//div[@class='raceMeeting_select']//span"/>
+    <dbg-prn:test str:val="${cache}"/>
+    <reg-rep:day str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*$" replacement="${day}"/>
+    <reg-rep:month str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*$" replacement="${month}"/>
+    <reg-rep:year str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*$" replacement="${year}"/>
+    <var:meeting i:val="${year:D4}${month:D2}${day:D2}"/>
+    <dbg-prn:test str:val="meeting: ${meeting}"/>
+    <var:date dt:val="${year:D4}/${month:D2}/${day:D2}"/>
+    <dbg-prn:test str:val="date: ${date}"/>
+    <reg-rep:venue str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*\s(?'venue'.*)$" replacement="${venue}"/>
+    <rep:venue str:val="${venue}" str:pattern="沙田" str:replacement="ST"/>
+    <rep:venue str:val="${venue}" str:pattern="跑馬地" str:replacement="HV"/>
+    <rep:venue str:val="${venue}" str:pattern="從化" str:replacement="CH"/>
+    <dbg-prn:test str:val="venue: ${venue}"/>
+
+    <add:meeting_info obj:val="${meeting}" key="meeting"/>
+    <add:meeting_info obj:val="${date}" key="date"/>
+    <add:meeting_info obj:val="${venue}" key="venue"/>
+    <add:meeting_info obj:val="${race_nums}" key="race_nums"/>
+
+    <!--
+    <dump:_ obj:val="${meeting_info}"/>
+    -->
+</config>
