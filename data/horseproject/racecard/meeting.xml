@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:bln="bool"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:i_s="int[]"
+  xmlns:str_s="string[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:node_s="node[]"
+  xmlns:txt_s="text[]"
+  xmlns:id="id"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:tmp="template"
+  xmlns:env="environment"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:add="add"
+  xmlns:prn="print"
+  xmlns:prn-line="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dbg-asr-eq="debug-assert-equal"
+  xmlns:pau="pause"
+>
+
+    <const:meeting_info obj:val="{}"/>
+
+    <sel:imgs html:val="${doc}" attr_s:xpath="//table[contains(@class,'js_racecard')]//img" str_s:attr="src"/>
+    <reg-fil:imgs str_s:val="${imgs}" pattern="^[^\d]+(?'num'\d+)[^\d]+$"/>
+    <reg-rep:race_nums i_s:val="${imgs}" pattern="^[^\d]+(?'num'\d+)[^\d]+$" replacement="${num}"/>
+    <dbg-prn:test str_s:val="${race_nums}"/>
+
+    <sel:caches html:val="${doc}" txt_s:xpath="//div[@class='f_fs13']"/>
+    <dbg-prn:test str_s:val="${caches}"/>
+    <reg-rep:year str:val="${caches[0]}" pattern="^(?'year'\d+)年(?'month'\d+)月(?'day'\d+)日.*$" replacement="${year}"/>
+    <reg-rep:month str:val="${caches[0]}" pattern="^(?'year'\d+)年(?'month'\d+)月(?'day'\d+)日.*$" replacement="${month}"/>
+    <reg-rep:day str:val="${caches[0]}" pattern="^(?'year'\d+)年(?'month'\d+)月(?'day'\d+)日.*$" replacement="${day}"/>
+    <var:meeting i:val="${year:D4}${month:D2}${day:D2}"/>
+    <dbg-prn:test str:val="meeting: ${meeting}"/>
+    <var:date dt:val="${year:D4}/${month:D2}/${day:D2}"/>
+    <dbg-prn:test str:val="date: ${date}"/>
+
+    <reg-rep:week str:val="${caches[0]}" pattern="^.*(?'week'星期.),.*$" replacement="${week}"/>
+    <dbg-prn:test str:val="week: ${week}"/>
+    <reg-rep:venue str:val="${caches[0]}" pattern="^.*(?'week'星期.),\s(?'venue'[^,]+),.*$" replacement="${venue}"/>
+    <rep:venue str:val="${venue}" str:pattern="沙田" str:replacement="ST"/>
+    <rep:venue str:val="${venue}" str:pattern="跑馬地" str:replacement="HV"/>
+    <rep:venue str:val="${venue}" str:pattern="從化" str:replacement="CH"/>
+    <dbg-prn:test str:val="venue: ${venue}"/>
+    <reg-rep:time str:val="${caches[0]}" pattern="^.*(?'week'星期.),\s(?'venue'[^,]+),\s(?'time'.*)$" replacement="${time}"/>
+    <dbg-prn:test str:val="time: ${time}"/>
+
+    <add:meeting_info obj:val="${meeting}" key="meeting"/>
+    <add:meeting_info obj:val="${date}" key="date"/>
+    <add:meeting_info obj:val="${week}" key="week"/>
+    <add:meeting_info obj:val="${venue}" key="venue"/>
+    <add:meeting_info obj:val="${time}" key="time"/>
+    <add:meeting_info obj:val="${race_nums}" key="race_nums"/>
+
+    <dump:_ obj:val="${meeting_info}"/>
+    <!--
+    <reg-rep:month str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*$" replacement="${month}"/>
+    <reg-rep:year str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*$" replacement="${year}"/>
+    <var:meeting i:val="${year:D4}${month:D2}${day:D2}"/>
+    <dbg-prn:test str:val="meeting: ${meeting}"/>
+    <var:date dt:val="${year:D4}/${month:D2}/${day:D2}"/>
+    <dbg-prn:test str:val="date: ${date}"/>
+    <reg-rep:venue str:val="${cache}" pattern="^.*\s(?'day'\d+)/(?'month'\d+)/(?'year'\d+)\s.*\s(?'venue'.*)$" replacement="${venue}"/>
+    <rep:venue str:val="${venue}" str:pattern="沙田" str:replacement="ST"/>
+    <rep:venue str:val="${venue}" str:pattern="跑馬地" str:replacement="HV"/>
+    <rep:venue str:val="${venue}" str:pattern="從化" str:replacement="CH"/>
+    <dbg-prn:test str:val="venue: ${venue}"/>
+
+    <add:meeting_info obj:val="${meeting}" key="meeting"/>
+    <add:meeting_info obj:val="${date}" key="date"/>
+    <add:meeting_info obj:val="${venue}" key="venue"/>
+    <add:meeting_info obj:val="${race_nums}" key="race_nums"/>
+
+    <dump:_ obj:val="${meeting_info}"/>    
+    -->
+</config>
