@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:str_s="string[]"
+  xmlns:bln="bool"
+  xmlns:i="int"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:xm="xml"
+  xmlns:html="html"
+  xmlns:id="id"
+  xmlns:reader="reader"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:env="environment"
+  xmlns:db="database"
+  xmlns:sel="select"
+  xmlns:sel-ex="select-exists"
+  xmlns:for-each="for-each"
+  xmlns:add="add"
+  xmlns:dl-async="download-async"
+  xmlns:reg-rep="regex-replace"
+  xmlns:rep="replace"
+  xmlns:for="for"
+  xmlns:scp-call="script-call"
+  xmlns:scp-set="script-set"
+  xmlns:prn-line="print-line"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dump="dump"
+>
+  <const:meeting_infos obj:val="[]"/>
+
+  <sel:caches html:val="${doc}" str_s:xpath="//div[contains(@class,'date_title')]//a"/>
+  <env:now val="${now}"/>
+  <var:year i:val="${now::Year}"/>
+  <for:i i:from="0" i:to="${caches::Length-1}">
+    <const:meeting_info obj:val="{}"/>
+
+    <sel:cache html:val="${doc}" str:xpath="//div[contains(@class,'date_title')]//a[${i+1}]"/>
+    <trim:cache xmlns:trim="trim" val="${cache}"/>
+    <reg-rep:month val="${cache}" pattern="^(?'month'\d+)月(?'day'\d+)日 - (?'venue'.*)$" replacement="${month}"/>
+    <reg-rep:day val="${cache}" pattern="^(?'month'\d+)月(?'day'\d+)日 - (?'venue'.*)$" replacement="${day}"/>
+    <var:meeting i:val="${year:D4}${month:D2}${day:D2}"/>    
+    <var:date dt:val="${year:D4}/${month:D2}/${day:D2}"/>
+    
+    <reg-rep:venue val="${cache}" pattern="^(?'month'\d+)月(?'day'\d+)日 - (?'venue'.*)$" replacement="${venue}"/>
+    <rep:venue str:val="${venue}" str:pattern="沙田" str:replacement="ST"/>
+    <rep:venue str:val="${venue}" str:pattern="跑馬地" str:replacement="HV"/>
+    <rep:venue str:val="${venue}" str:pattern="從化" str:replacement="CH"/>
+
+    <add:meeting_info val="${meeting}" key="meeting"/>
+    <add:meeting_info val="${date}" key="date"/>
+    <add:meeting_info val="${venue}" key="venue"/>
+
+    <add:meeting_infos val="${meeting_info}"/>
+    <!--
+    <dump:_ obj:val="${meeting_info}"/>
+    <brk:_ xmlns:brk="break"/>
+    -->
+  </for:i>
+  <!--
+  <var:str_meeting str:val="${meeting}"/>
+  <reg-rep:year i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${year}"/>
+  <reg-rep:month i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${month}"/>
+  <reg-rep:day i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${day}"/>
+  <var:last_date dt:val="${year}/${month}/${day}"/>
+  <var:url str:val="https://racing.hkjc.com/racing/information/Chinese/racing/RaceCard.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&amp;Racecourse=${venue}&amp;RaceNo=${race_num}"/>
+  -->
+
+</config>
