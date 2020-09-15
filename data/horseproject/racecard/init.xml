@@ -53,7 +53,9 @@
           <scp-call:_ xm:val="${getracepath_script}"/>
           <prn-line:_ str:val="${path}"/>
 
-          <doc-save:_ html:val="${doc}" path="${path}" overwrite="false"/>
+          <dl-async:doc html:val="${url}" id:find="mainContainer">
+            <doc-save:_ html:val="${doc}" path="${path}" overwrite="false"/>
+          </dl-async:doc>
 
           <!--
           <dl-async:doc html:val="${url}" id:find="mainContainer">
