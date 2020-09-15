@@ -23,10 +23,6 @@
   xmlns:dbg-mode="debug-mode"
 >
 
-  <!--<var:str_meeting str:val="${meeting}"/>
-  <reg-rep:year i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${year}"/>
-  <reg-rep:month i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${month}"/>
-  <reg-rep:day i:val="${str_meeting}" pattern="^(?'year'\d{4})(?'month'\d{2})(?'day'\d{2})$" replacement="${day}"/>-->
-  <var:path str:val="E:\Storage\Work\Database\Project\HorseProject\chinese\racecard\html\${year:D4}\${month:D2}\${day:D2}\${race_num:D2}.html"/>
+  <var:race_path str:val="E:\Storage\Work\Database\Project\HorseProject\chinese\racecard\html\${year:D4}\${month:D2}\${day:D2}\${race_num:D2}.html"/>
 
 </config>
