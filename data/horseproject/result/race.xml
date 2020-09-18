@@ -44,7 +44,7 @@
     <reg-rep:all_race_num str:val="${cache}" pattern="^第\s(?'race_num'\d+)\s場.*\((?'all_race_num'\d+)\)$" replacement="${all_race_num}"/>
     <dbg-prn:test str:val="all_race_num: ${all_race_num}"/>
     <var:race i:val="${meeting:D8}${race_num:D2}"/>
-    <dbg-prn:test str:val="race_num: ${race}"/>
+    <dbg-prn:test str:val="race: ${race}"/>
 
     <sel:cache html:val="${doc}" str:xpath="//div[@class='race_tab']//tbody/tr[2]/td[1]"/>
     <reg-rep:class str:val="${cache}" pattern="^(?'class'[^\s]+)\s-\s.*$" replacement="${class}"/>
@@ -55,8 +55,10 @@
     <dbg-prn:test str:val="rating_range: ${rating_range}"/>
     <reg-rep:rating_max str:val="${rating_range}" pattern="^((?'rating_max'\d+)-)?(?'rating_min'\d+)\+?$" replacement="${rating_max}"/>
     <var:rating_max i:val="${rating_max}"/>
+    <dbg-prn:test str:val="rating_max: ${rating_max}"/>
     <reg-rep:rating_min str:val="${rating_range}" pattern="^((?'rating_max'\d+)-)?(?'rating_min'\d+)\+?$" replacement="${rating_min}"/>
     <var:rating_min i:val="${rating_min}"/>
+    <dbg-prn:test str:val="rating_min: ${rating_min}"/>
 
     <sel:cache html:val="${doc}" str:xpath="//div[@class='race_tab']//tbody/tr[2]/td[3]"/>
     <dbg-prn:test str:val="${cache}"/>
