@@ -59,15 +59,11 @@
   <scp-call:_ xm:val="${lastmeeting_script}"/>
   <scp-call:_ xm:val="${getmeetingurl_script}"/>
   <env:now dt:val="${now}"/>
-
+  
+  <!--
   <const:meetings obj:val="[]"/>
-
   <const:last_date dt:val="#2020/09/05#"/>
   <const:now dt:val="#2020/09/07#"/>
-  <!--
-  -->
-
-  <!--
   <const:last_date2 dt:val="#1979/09/28#"/>
   <const:now2 dt:val="#2020/07/16#"/>
   -->
@@ -85,9 +81,6 @@
           <scp-call:_ xm:val="${meeting_script}"/>
 
           <for-each:race_num i:val="${race_nums}">
-            <!--
-            <const:race_num i:val="2i"/>
-            -->
 
             <scp-call:_ xm:val="${getraceurl_script}"/>
             <scp-call:_ xm:val="${getracepath_script}"/>
@@ -96,8 +89,8 @@
             <prn-line:_ str:val="${race_path}"/>
 
             <dl-async:html str:val="${race_url}" id:find="mainContainer">
+              
               <doc-save:_ str:val="${html}" path="${race_path}" overwrite="false"/>
-
               <doc-load:doc auto:val="${html}"/>
 
               <scp-call:_ xm:val="${meeting_script}"/>
