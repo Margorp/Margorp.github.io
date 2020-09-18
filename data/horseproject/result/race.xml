@@ -37,13 +37,6 @@
   xmlns:dbg-asr-eq="debug-assert-equal"
   xmlns:pau="pause"
 >
-  <!--
-  <dbg-mode:test bln:val="false" />
-  <const:url str:val="https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=2020/07/12&amp;Racecourse=ST&amp;RaceNo=1"/>
-  <const:meeting i:val="20200712"/>
-  <const:venue str:val="ST"/>
-  <dl-async:doc html:val="${url}" id:find="mainContainer">
-  -->
     <sel:cache html:val="${doc}" str:xpath="//div[@class='race_tab']//thead/tr[1]/td[1]"/>
     <dbg-prn:test str:val="${cache}"/>
     <reg-rep:race_num str:val="${cache}" pattern="^第\s(?'race_num'\d+)\s場.*$" replacement="${race_num}"/>
@@ -126,26 +119,6 @@
     <dbg-prn:test obj_s:val="${winner_sires}"/>
     <dbg-prn:test obj_s:val="${winner_dams}"/>
 
-    <!--
-    <sel:cache html:val="${doc}" str:xpath="//table[contains(@class,'hourse_breed_tab')]/tbody/tr/td/a"/>
-    <var:winner str:val="${cache}"/>
-    <dbg-prn:test str:val="${winner}"/>
-    
-    <sel:cache html:val="${doc}" str:xpath="//table[contains(@class,'hourse_breed_tab')]/tbody/tr/td[2]/p[1]"/>
-    <reg-rep:winner_sire str:val="${cache}" pattern="^.*: (?'sire'.*)$" replacement="${sire}"/>
-    <dbg-prn:test str:val="${winner_sire}"/>
-
-    <sel:cache html:val="${doc}" str:xpath="//table[contains(@class,'hourse_breed_tab')]/tbody/tr/td[2]/p[2]"/>
-    <reg-rep:winner_dam str:val="${cache}" pattern="^.*: (?'dam'.*)$" replacement="${dam}"/>
-    <dbg-prn:test str:val="${winner_dam}"/>
-    -->
-
-    <!--
-    <sel:cache html:val="${doc}" str:xpath="//div[@class='race_incident_report']/p[2]"/>
-    <var:report str:val="${cache}"/>
-    <dbg-prn:test str:val="${report}"/>
-    -->
-
     <const:race_info obj:val="{}"/>
     <add:race_info i:val="${meeting}" key="meeting"/>
     <add:race_info i:val="${race}" key="race"/>
@@ -191,15 +164,5 @@
       winner_sires:winner_sire,
       winner_dams:winner_dam
       }"/>
-    <!--
-    -->
-
-    <!--
-    <dump:debug obj:val="${race_info}"/>
-    -->
-
-  <!--
-  </dl-async:doc>
-  -->
 
 </config>
