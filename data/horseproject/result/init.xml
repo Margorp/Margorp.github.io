@@ -100,6 +100,8 @@
               <scp-call:_ xm:val="${report_script}"/>
               <scp-call:_ xm:val="${odds_script}"/>
 
+              <db:race_tblname ins:val="${race_info}" table="result.race"/>
+              
               <!--
               <if:_ val="${race_num==1}">
                 <then>
