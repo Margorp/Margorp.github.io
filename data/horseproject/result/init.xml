@@ -61,13 +61,14 @@
   <env:now dt:val="${now}"/>
   
   <!--
-  <const:meetings obj:val="[]"/>
   <const:last_date dt:val="#2020/09/05#"/>
   <const:now dt:val="#2020/09/07#"/>
   <const:last_date2 dt:val="#1979/09/28#"/>
   <const:now2 dt:val="#2020/07/16#"/>
   -->
 
+  <const:meetings obj:val="[]"/>
+  
   <for:date dt:from="${last_date+1}" dt:to="${now}">
 
     <var:meeting i:val="${date::Year:D4}${date::Month:D2}${date::Day:D2}"/>
