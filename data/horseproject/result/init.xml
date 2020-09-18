@@ -100,14 +100,14 @@
               <scp-call:_ xm:val="${report_script}"/>
               <scp-call:_ xm:val="${odds_script}"/>
 
-              <db:race_tblname ins:val="${race_info}" table="result.race"/>
-              
-              <!--
               <if:_ val="${race_num==1}">
                 <then>
                   <db:meeting_tblname ins:val="${meeting_info}" table="result.meeting"/>
                 </then>
               </if:_>
+              
+              <db:race_tblname ins:val="${race_info}" table="result.race"/>              
+              <!--
               <db:race_tblname ins:val="${race_info}" table="result.race"/>
               <db:report_tblname ins:val="${report_info}" table="result.report"/>
               <db:horse_tblname ins:val="${horse_infos}" table="result.horse"/>
