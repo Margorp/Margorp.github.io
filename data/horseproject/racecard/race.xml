@@ -56,6 +56,14 @@
 
     <sel:caches html:val="${doc}" txt_s:xpath="//div[contains(@class,'f_fs13')]"/>
     <dbg-prn:test str_s:val="caches: ${caches}"/>
+  
+    <reg-rep:start_time str:val="${caches[0]}" pattern="^(?'year'\d+)年(?'month'\d+)月(?'day'\d+)日,\s(?'weekday'[^,]+),\s(?'venue'[^,]+),\s(?'start_time'.*)$" replacement="${start_time}"/>
+  
+    <reg-rep:track str:val="${caches[1]}" pattern="^(?'track'[^,]+),\s(""(?'course'[^""]+)""\s賽道,\s)?(?'distance'\d+)米,\s(?'going'.*)$" replacement="${track}"/>
+    <reg-rep:course str:val="${caches[1]}" pattern="^(?'track'[^,]+),\s(""(?'course'[^""]+)""\s賽道,\s)?(?'distance'\d+)米,\s(?'going'.*)$" replacement="${course}"/>
+    <reg-rep:distance str:val="${caches[1]}" pattern="^(?'track'[^,]+),\s(""(?'course'[^""]+)""\s賽道,\s)?(?'distance'\d+)米,\s(?'going'.*)$" replacement="${distance}"/>
+    <reg-rep:going str:val="${caches[1]}" pattern="^(?'track'[^,]+),\s(""(?'course'[^""]+)""\s賽道,\s)?(?'distance'\d+)米,\s(?'going'.*)$" replacement="${going}"/>
+  
   <!--
     <reg-rep:class str:val="${cache}" pattern="^(?'class'[^\s]+)\s-\s.*$" replacement="${class}"/>
     <dbg-prn:test str:val="class: ${class}"/>
@@ -199,7 +207,12 @@
     <add:race_info i:val="${meeting}" key="meeting"/>
     <add:race_info i:val="${race}" key="race"/>
     <add:race_info i:val="${race_num}" key="race_num"/>
-    <add:race_info str:val="${race_name}" key="race_name"/>
+    <add:race_info i:val="${race_name}" key="race_name"/>
+    <add:race_info i:val="${start_time}" key="start_time"/>
+    <add:race_info str:val="${track}" key="track"/>
+    <add:race_info str:val="${course}" key="course"/>
+    <add:race_info str:val="${distance}" key="distance"/>
+    <add:race_info str:val="${going}" key="going"/>
   
     <dump:debug obj:val="${race_info}"/>
     <!--
