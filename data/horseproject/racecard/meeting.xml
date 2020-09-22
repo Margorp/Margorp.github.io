@@ -55,11 +55,13 @@
 
     <reg-rep:week str:val="${caches[0]}" pattern="^.*(?'week'星期.),.*$" replacement="${week}"/>
     <dbg-prn:test str:val="week: ${week}"/>
+  
     <reg-rep:venue str:val="${caches[0]}" pattern="^.*(?'week'星期.),\s(?'venue'[^,]+),.*$" replacement="${venue}"/>
     <rep:venue str:val="${venue}" str:pattern="沙田" str:replacement="ST"/>
     <rep:venue str:val="${venue}" str:pattern="跑馬地" str:replacement="HV"/>
     <rep:venue str:val="${venue}" str:pattern="從化" str:replacement="CH"/>
     <dbg-prn:test str:val="venue: ${venue}"/>
+  
     <reg-rep:time str:val="${caches[0]}" pattern="^.*(?'week'星期.),\s(?'venue'[^,]+),\s(?'time'.*)$" replacement="${time}"/>
     <dbg-prn:test str:val="time: ${time}"/>
 
