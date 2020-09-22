@@ -36,6 +36,7 @@
   <scp-set:meeting_script xm:val="${host}meeting.xml"/>
   <scp-set:race_script xm:val="${host}race.xml"/>
   <scp-set:horse_script xm:val="${host}horse.xml"/>
+  <scp-set:standby_script xm:val="${host}standby.xml"/>
 
   <const:url str:val="https://racing.hkjc.com/racing/information/Chinese/racing/RaceCard.aspx"/>
     
@@ -54,7 +55,14 @@
           <prn-line:_ str:val="${race_path}"/>
 
           <dl-async:doc html:val="${race_url}" id:find="mainContainer">
+            <!--
             <doc-save:_ html:val="${doc}" path="${race_path}" overwrite="false"/>
+            -->
+            
+            <scp-call:_ xm:val="${race_script}"/>
+            <scp-call:_ xm:val="${horse_script}"/>
+            <scp-call:_ xm:val="${standby_script}"/>            
+            
           </dl-async:doc>
 
           <!--
