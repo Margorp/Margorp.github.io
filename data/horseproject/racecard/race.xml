@@ -66,9 +66,9 @@
     <reg-rep:going str:val="${caches[1]}" pattern="${pattern}" replacement="${going}"/>
   
     <var:pattern str:val="^獎金:\s\$(?'prize'[\d,\.]+),\s評分:\s(?'rtg_rng'\d+-\d+),\s(?'class'.*)$"/>
-    <reg-rep:prize str:val="${caches[1]}" pattern="${pattern}" replacement="${prize}"/>
-    <reg-rep:rtg_rng str:val="${caches[1]}" pattern="${pattern}" replacement="${rtg_rng}"/>
-    <reg-rep:class str:val="${caches[1]}" pattern="${pattern}" replacement="${class}"/>
+    <reg-rep:prize str:val="${caches[2]}" pattern="${pattern}" replacement="${prize}"/>
+    <reg-rep:rtg_rng str:val="${caches[2]}" pattern="${pattern}" replacement="${rtg_rng}"/>
+    <reg-rep:class str:val="${caches[2]}" pattern="${pattern}" replacement="${class}"/>
   
   <!--
     <reg-rep:class str:val="${cache}" pattern="^(?'class'[^\s]+)\s-\s.*$" replacement="${class}"/>
