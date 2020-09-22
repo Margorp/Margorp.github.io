@@ -100,7 +100,6 @@
               <scp-call:_ xm:val="${report_script}"/>
               <scp-call:_ xm:val="${odds_script}"/>
 
-              <!--              
               <if:_ val="${race_num==1}">
                 <then>
                   <db:meeting_tblname ins:val="${meeting_info}" table="result.meeting"/>
@@ -108,7 +107,6 @@
               </if:_>              
               <db:race_tblname ins:val="${race_info}" table="result.race"/>
               <db:report_tblname ins:val="${report_info}" table="result.report"/>
-              -->
               <db:horse_tblname ins:val="${horse_infos}" table="result.horse"/>
               <db:combination_tblname ins:val="${combination_info}" table="result.combination"/>
               <db:dividend_tblname ins:val="${dividend_info}" table="result.dividend"/>
