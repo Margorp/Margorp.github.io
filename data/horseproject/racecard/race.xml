@@ -11,6 +11,7 @@
   xmlns:str_s="string[]"
   xmlns:obj_s="object[]"
   xmlns:attr_s="attribute[]"
+  xmlns:txt_s="text[]"
   xmlns:node_s="node[]"
   xmlns:id="id"
   xmlns:const="constant"
@@ -44,16 +45,18 @@
   <const:venue str:val="ST"/>
   <dl-async:doc html:val="${url}" id:find="mainContainer">
   -->
-    <sel:cache html:val="${doc}" str:xpath="//div[@class='race_tab']//thead/tr[1]/td[1]"/>
+    <sel:cache html:val="${doc}" str:xpath="//div[contains(@class,'f_fs13')]/span"/>
     <dbg-prn:test str:val="${cache}"/>
-    <reg-rep:race_num str:val="${cache}" pattern="^第\s(?'race_num'\d+)\s場.*$" replacement="${race_num}"/>
+    <reg-rep:race_num str:val="${cache}" pattern="^第\s(?'race_num'\d+)\s場\s-\s(?'race_name'.*)$" replacement="${race_num}"/>
     <dbg-prn:test str:val="race_num: ${race_num}"/>
-    <reg-rep:all_race_num str:val="${cache}" pattern="^第\s(?'race_num'\d+)\s場.*\((?'all_race_num'\d+)\)$" replacement="${all_race_num}"/>
-    <dbg-prn:test str:val="all_race_num: ${all_race_num}"/>
+    <reg-rep:race_name str:val="${cache}" pattern="^第\s(?'race_num'\d+)\s場\s-\s(?'race_name'.*)$" replacement="${race_name}"/>
+    <dbg-prn:test str:val="race_name: ${race_name}"/>
     <var:race i:val="${meeting:D8}${race_num:D2}"/>
-    <dbg-prn:test str:val="race_num: ${race}"/>
+    <dbg-prn:test str:val="race: ${race}"/>
 
-    <sel:cache html:val="${doc}" str:xpath="//div[@class='race_tab']//tbody/tr[2]/td[1]"/>
+    <sel:caches html:val="${doc}" txt_s:xpath="//div[contains(@class,'f_fs13')]"/>
+    <dbg-prn:test str_s:val="caches: ${caches}"/>
+  <!--
     <reg-rep:class str:val="${cache}" pattern="^(?'class'[^\s]+)\s-\s.*$" replacement="${class}"/>
     <dbg-prn:test str:val="class: ${class}"/>
     <reg-rep:distance str:val="${cache}" pattern="^(?'class'[^\s]+)\s-\s(?'distance'\d+)米.*$" replacement="${distance}"/>
@@ -125,7 +128,8 @@
     <dbg-prn:test obj_s:val="${winners}"/>
     <dbg-prn:test obj_s:val="${winner_sires}"/>
     <dbg-prn:test obj_s:val="${winner_dams}"/>
-
+  -->
+  
     <!--
     <sel:cache html:val="${doc}" str:xpath="//table[contains(@class,'hourse_breed_tab')]/tbody/tr/td/a"/>
     <var:winner str:val="${cache}"/>
@@ -146,6 +150,7 @@
     <dbg-prn:test str:val="${report}"/>
     -->
 
+  <!--
     <const:race_info obj:val="{}"/>
     <add:race_info i:val="${meeting}" key="meeting"/>
     <add:race_info i:val="${race}" key="race"/>
@@ -163,9 +168,6 @@
     <add:race_info i:val="${money_prize}" key="money_prize"/>
     <add:race_info obj_s:val="${sect_times}" key="sect_times"/>
     <add:race_info obj_s:val="${full_times}" key="full_times"/>
-    <!--
-    <add:race_info str:val="${report}" key="report"/>
-    -->
     <add:race_info obj_s:val="${winners}" key="winners"/>
     <add:race_info obj_s:val="${winner_sires}" key="winner_sires"/>
     <add:race_info obj_s:val="${winner_dams}" key="winner_dams"/>
@@ -191,9 +193,14 @@
       winner_sires:winner_sire,
       winner_dams:winner_dam
       }"/>
-    <!--
     -->
 
+    <const:race_info obj:val="{}"/>
+    <add:race_info i:val="${meeting}" key="meeting"/>
+    <add:race_info i:val="${race}" key="race"/>
+    <add:race_info i:val="${race_num}" key="race_num"/>
+    <add:race_info str:val="${race_name}" key="race_name"/>
+  
     <dump:debug obj:val="${race_info}"/>
     <!--
     -->
