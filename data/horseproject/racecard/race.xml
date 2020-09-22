@@ -65,6 +65,11 @@
     <reg-rep:distance str:val="${caches[1]}" pattern="${pattern}" replacement="${distance}"/>
     <reg-rep:going str:val="${caches[1]}" pattern="${pattern}" replacement="${going}"/>
   
+    <var:pattern str:val="^獎金:\s\$(?'prize'[\d,\.]+),\s評分:\s(?'rtg_rng'\d+-\d+),\s(?'class'.*)$"/>
+    <reg-rep:prize str:val="${caches[1]}" pattern="${pattern}" replacement="${prize}"/>
+    <reg-rep:rtg_rng str:val="${caches[1]}" pattern="${pattern}" replacement="${rtg_rng}"/>
+    <reg-rep:class str:val="${caches[1]}" pattern="${pattern}" replacement="${class}"/>
+  
   <!--
     <reg-rep:class str:val="${cache}" pattern="^(?'class'[^\s]+)\s-\s.*$" replacement="${class}"/>
     <dbg-prn:test str:val="class: ${class}"/>
@@ -213,7 +218,10 @@
     <add:race_info str:val="${track}" key="track"/>
     <add:race_info str:val="${course}" key="course"/>
     <add:race_info str:val="${distance}" key="distance"/>
-    <add:race_info str:val="${going}" key="going"/>
+    <add:race_info str:val="${going}" key="going"/>  
+    <add:race_info str:val="${prize}" key="prize"/>
+    <add:race_info str:val="${rtg_rng}" key="rtg_rng"/>
+    <add:race_info str:val="${class}" key="class"/>
   
     <dump:debug obj:val="${race_info}"/>
     <!--
