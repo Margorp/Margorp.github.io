@@ -59,12 +59,12 @@
 
           <dl-async:doc html:val="${race_url}" id:find="mainContainer">
             <!--
-            <doc-save:_ html:val="${doc}" path="${race_path}" overwrite="false"/>
             -->
+            <doc-save:_ html:val="${doc}" path="${race_path}" overwrite="false"/>
             
+            <!--
             <scp-call:_ xm:val="${race_script}"/>
             <scp-call:_ xm:val="${horse_script}"/>
-            <!--
             <scp-call:_ xm:val="${standby_script}"/>
             -->
           </dl-async:doc>
