@@ -137,7 +137,9 @@
         </else>
         -->
       </if:_>
+      <!--
       <dbg-prn:test str:val="${colname}: ${td}"/>
+      -->
       <add:horse_info obj:val="${td}" key="${colname}"/>
       <!--
       <dump:_ obj:val="${horse_info}"/>
