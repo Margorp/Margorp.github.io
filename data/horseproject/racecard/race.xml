@@ -60,7 +60,7 @@
     <var:pattern str:val="^(?'year'\d+)年(?'month'\d+)月(?'day'\d+)日,\s(?'weekday'[^,]+),\s(?'venue'[^,]+),\s(?'start_time'.*)$"/>
     <reg-rep:start_time str:val="${caches[0]}" pattern="${pattern}" replacement="${start_time}"/>
   
-    <var:pattern str:val="^(?'track'[^,]+),\s(&quot;(?'course'[^&quot;]+)&quot;\s賽道,\s)?(?'distance'\d+)米,\s(?'going'.*)$"/>
+    <var:pattern str:val="^(?'track'[^,]+),\s(&quot;(?'course'[^&quot;]+)&quot;\s賽道,\s)?(?'distance'\d+)米(,\s(?'going'.*))?$"/>
     <reg-rep:track str:val="${caches[1]}" pattern="${pattern}" replacement="${track}"/>
     <reg-rep:course str:val="${caches[1]}" pattern="${pattern}" replacement="${course}"/>
     <reg-rep:distance str:val="${caches[1]}" pattern="${pattern}" replacement="${distance}"/>
