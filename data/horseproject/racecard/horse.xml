@@ -64,6 +64,7 @@
       <if:_ bln:val="${colname==烙號}">
         <then>
           <var:record str:val="${meeting}${race_num:D2}${td}"/>
+          <add:horse_info i:val="${record}" key="record"/>
         </then>
         <!--
         <else>
