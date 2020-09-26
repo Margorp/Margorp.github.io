@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config
+  xmlns:str="string"
+  xmlns:i="int"
+  xmlns:dbl="double"
+  xmlns:bln="bool"
+  xmlns:dt="datetime"
+  xmlns:obj="object"
+  xmlns:html="html"
+  xmlns:attr="attribute"
+  xmlns:i_s="int[]"
+  xmlns:str_s="string[]"
+  xmlns:dbl_s="double[]"
+  xmlns:obj_s="object[]"
+  xmlns:attr_s="attribute[]"
+  xmlns:node_s="node[]"
+  xmlns:id="id"
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:tmp="template"
+  xmlns:env="environment"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:sel-ex="select-exists"
+  xmlns:sel-ex="select-exists"
+  xmlns:reg-rep="regex-replace"
+  xmlns:reg-fil="regex-filter"
+  xmlns:rep="replace"
+  xmlns:trim="trim"
+  xmlns:for="for"
+  xmlns:for-each="for-each"
+  xmlns:if="if"
+  xmlns:ren="rename"
+  xmlns:add="add"
+  xmlns:prn="print"
+  xmlns:prn-line="print-line"
+  xmlns:dump="dump"
+  xmlns:dbg-mode="debug-mode"
+  xmlns:dbg-prn="debug-print"
+  xmlns:dbg-asr-eq="debug-assert-equal"
+  xmlns:pau="pause"
+  xmlns:time2sec="time-to-second"
+  xmlns:fact2dbl="faction-to-double"
+  xmlns:order="order"
+  xmlns:ref="reference"
+>
+
+  <const:standby_infos obj:val="[]"/>
+
+  <sel-ex:exists html:val="${doc}" str:xpath="//table[contains(@id,'standbylist')]"/>
+  
+  <if:_ bln:val="${exists==true}">
+    <then>
+      <const:colnames obj:val="[]"/>
+      <sel:tds html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]/tbody/tr[1]/td"/>
+      <for:i i:from="0" i:to="${trs::Length-1}">
+        <trim:td str:val="${tds[i+1]/>
+        <add:colnames str:val="${td}"/>
+      </for:i>
+      
+      <sel:trs html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]/tbody/tr"/>      
+      <for:i i:from="1" i:to="${trs::Length-1}">
+        <const:standby_info obj:val="{}"/>
+        <add:standby_info i:val="${meeting}" key="meeting"/>
+        <add:standby_info i:val="${race}" key="race"/>
+
+        <sel:tds html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]//tbody/tr[${i+1}]/td"/>
+        <for:j i:from="0" i:to="${tds::Length-1}">
+          <var:colname str:val="${colnames[${j}]}"/>
+          
+          <trim:td str:val="${tds[${j}]}"/>
+          <add:standby_info i:val="${td}" key="${colname}"/>
+        </for:j>
+        <add:standby_infos obj:val="${standby_info}"/>
+      </for:i>
+      
+    </then>
+  </if:_>  
+  
+  <dump:_ obj_s:val="${standby_infos}"/>
+  <!--
+  -->
+</config>
