@@ -58,6 +58,7 @@
         <add:colnames str:val="${td}"/>
       </for:i>
       
+      <!--
       <sel:trs html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]/tbody/tr"/>
       <for:i i:from="1" i:to="${trs::Length-1}">
         <const:standby_info obj:val="{}"/>
@@ -71,9 +72,10 @@
           <trim:td str:val="${tds[${j}]}"/>
           <add:standby_info i:val="${td}" key="${colname}"/>
         </for:j>
+
         <add:standby_infos obj:val="${standby_info}"/>
       </for:i>
-      
+      -->
     </then>
   </if:_>
   
