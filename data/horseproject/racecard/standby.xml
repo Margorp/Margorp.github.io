@@ -45,7 +45,10 @@
 >
 
   <const:standby_infos obj:val="[]"/>
-
+  
+  <const:url str:val="https://racing.hkjc.com/racing/information/Chinese/racing/RaceCard.aspx?RaceDate=2020/09/27&Racecourse=ST&RaceNo=2"/>
+  <dl:doc html:val="${url}" id:find="mainContainer"/>
+    
   <sel-ex:exists html:val="${doc}" str:xpath="//table[@id='standbylist']"/>
   
   <if:_ bln:val="${exists==true}">
