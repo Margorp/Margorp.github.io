@@ -73,8 +73,10 @@
           <trim:td str:val="${tds[${j}]}"/>
           <add:standby_info i:val="${td}" key="${colname}"/>
         </for:j>
--->
+
         <add:standby_infos obj:val="${standby_info}"/>
+-->
+        
       </for:i>
       
     </then>
