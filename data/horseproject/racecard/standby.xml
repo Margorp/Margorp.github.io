@@ -58,15 +58,14 @@
       <sel:tds html:val="${doc}" str_s:xpath="//table[@id='standbylist']/tbody/tr[1]/td"/>
       
       <for:i i:from="0" i:to="${tds::Length-1}">
-        <trim:td str:val="${tds[i]}"/>
+        <trim:td str:val="${tds[${i}]}"/>
         <add:colnames obj:val="${td}"/>
       </for:i>
       
       <sel:trs html:val="${doc}" str_s:xpath="//table[@id='standbylist']/tbody/tr"/>
-<!--      
+
       <for:i i:from="1" i:to="${trs::Length-1}">
-        <const:standby_info obj:val="{}"/>
-        
+        <const:standby_info obj:val="{}"/>        
 
         <add:standby_info i:val="${meeting}" key="meeting"/>
         <add:standby_info i:val="${race}" key="race"/>
@@ -80,14 +79,12 @@
         </for:j>
 
         <add:standby_infos obj:val="${standby_info}"/>
-
         
       </for:i>
--->      
+
     </then>
   </if:_>
   
   <dump:_ obj_s:val="${standby_infos}"/>
-  <!--
-  -->
+  
 </config>
