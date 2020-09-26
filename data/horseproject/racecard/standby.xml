@@ -60,11 +60,11 @@
       </for:i>
       
       <sel:trs html:val="${doc}" str_s:xpath="//table[@id='standbylist']/tbody/tr"/>
-      
+<!--      
       <for:i i:from="1" i:to="${trs::Length-1}">
         <const:standby_info obj:val="{}"/>
         
-<!--
+
         <add:standby_info i:val="${meeting}" key="meeting"/>
         <add:standby_info i:val="${race}" key="race"/>
 
@@ -77,10 +77,10 @@
         </for:j>
 
         <add:standby_infos obj:val="${standby_info}"/>
--->
+
         
       </for:i>
-      
+-->      
     </then>
   </if:_>
   
