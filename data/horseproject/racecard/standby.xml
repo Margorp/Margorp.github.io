@@ -19,6 +19,7 @@
   xmlns:var="variable"
   xmlns:tmp="template"
   xmlns:env="environment"
+  xmlns:dl="download"
   xmlns:dl-async="download-async"
   xmlns:sel="select"
   xmlns:sel-ex="select-exists"
