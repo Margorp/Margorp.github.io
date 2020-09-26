@@ -61,12 +61,11 @@
       
       <sel:trs html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]/tbody/tr"/>
       
-      <!--
       <for:i i:from="1" i:to="${trs::Length-1}">
         <const:standby_info obj:val="{}"/>
         <add:standby_info i:val="${meeting}" key="meeting"/>
         <add:standby_info i:val="${race}" key="race"/>
-
+<!--
         <sel:tds html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]//tbody/tr[${i+1}]/td"/>
         <for:j i:from="0" i:to="${tds::Length-1}">
           <var:colname str:val="${colnames[${j}]}"/>
@@ -74,10 +73,10 @@
           <trim:td str:val="${tds[${j}]}"/>
           <add:standby_info i:val="${td}" key="${colname}"/>
         </for:j>
-
+-->
         <add:standby_infos obj:val="${standby_info}"/>
       </for:i>
-      -->
+      
     </then>
   </if:_>
   
