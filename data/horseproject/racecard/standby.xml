@@ -54,7 +54,7 @@
       <const:colnames obj:val="[]"/>
       <sel:tds html:val="${doc}" str_s:xpath="//table[contains(@id,'standbylist')]/tbody/tr[1]/td"/>
       <for:i i:from="0" i:to="${trs::Length-1}">
-        <trim:td str:val="${tds[i+1]/>
+        <trim:td str:val="${tds[i+1]}"/>
         <add:colnames str:val="${td}"/>
       </for:i>
       
