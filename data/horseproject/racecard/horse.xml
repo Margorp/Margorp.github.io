@@ -49,6 +49,7 @@
   xmlns:list="list"
   xmlns:file="file"
   xmlns:return="return"
+  xmlns:doc-load="doc-load"
 >
 
   <const:horse_infos obj:val="[]"/>
