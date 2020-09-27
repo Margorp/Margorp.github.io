@@ -7,6 +7,7 @@
   xmlns:dt="datetime"
   xmlns:obj="object"
   xmlns:html="html"
+  xmlns:xm="xm"
   xmlns:attr="attribute"
   xmlns:i_s="int[]"
   xmlns:str_s="string[]"
@@ -45,10 +46,18 @@
   xmlns:switch="switch"
   xmlns:case="case"
   xmlns:default="default"
+  xmlns:list="list"
+  xmlns:file="file"
 >
 
   <const:horse_infos obj:val="[]"/>
-
+                          
+  <const:folder str:val="E:/Storage/Work/Database/Project/HorseProject/chinese/racecard/html/2020/10/01"/>
+  <list:files val="${folder}"
+  <dump:_ val="${files}"/>
+  
+  <doc-load:doc xm:val=$"{files[0]}"/>
+  
   <sel:caches html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//thead/tr[1]/td"/>
   <var:colnames str_s:val="${caches}"/>
   <dump:_ val="${colnames}"/>
