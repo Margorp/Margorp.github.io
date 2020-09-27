@@ -7,4 +7,7 @@
 >
   <const:folder str:val="E:/Storage/Work/Database/Project/HorseProject/chinese/racecard/html/2020/10/01"/>
   <dump:_ val="${folder}"/>
+  
+  <list:files file:val="${folder}"/>
+  <dump:_ val="${files}"/>
 </config>
