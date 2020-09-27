@@ -48,13 +48,15 @@
   xmlns:default="default"
   xmlns:list="list"
   xmlns:file="file"
+  xmlns:return="return"
 >
 
   <const:horse_infos obj:val="[]"/>
                           
   <const:folder str:val="E:/Storage/Work/Database/Project/HorseProject/chinese/racecard/html/2020/10/01"/>
-  <list:files val="${folder}"
+  <list:files file:val="${folder}"/>
   <dump:_ val="${files}"/>
+  <return:_/>
   
   <doc-load:doc html:val=$"{files[0]}"/>
   
