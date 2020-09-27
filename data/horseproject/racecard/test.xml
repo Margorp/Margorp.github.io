@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config
   xmlns:const="constant"
+  xmlns:var="variable"
   xmlns:list="list"
   xmlns:dump="dump"
   xmlns:str="string"
