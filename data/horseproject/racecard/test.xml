@@ -11,4 +11,7 @@
   
   <list:files file:val="${folder}"/>
   <dump:_ val="${files}"/>
+  
+  <var:file str:val="${files[0]}"/>
+  <doc-load:doc html:val="${file}"/>  
 </config>
