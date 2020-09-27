@@ -68,7 +68,7 @@
         <case:_ val="烙號">
           <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]"/>
           <var:record str:val="${meeting}${race_num:D2}${td}"/>
-          <add:horse_info i:val="${record}" key="record"/>
+          <add:horse_info str:val="${record}" key="record"/>
         </case:_>
         <case:_ val="馬名">
           <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/a"/>
@@ -82,6 +82,7 @@
         <default:_>
         </default:_>
       </switch:colname>
+      <add:horse_info str:val="${td}" key="${colname}"/>
       
       <!--
       <if:_ bln:val="${colname==烙號}">
