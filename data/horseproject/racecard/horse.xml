@@ -42,6 +42,9 @@
   xmlns:fact2dbl="faction-to-double"
   xmlns:order="order"
   xmlns:ref="reference"
+  xmlns:switch="switch"
+  xmlns:case="case"
+  xmlns:default="default"
 >
 
   <const:horse_infos obj:val="[]"/>
@@ -61,11 +64,26 @@
       
       <trim:td str:val="${tds[${j}]}"/>
       
+      <switch:colname>
+        <case:_ val="烙號">
+          <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/a"/>
+          <var:record str:val="${meeting}${race_num:D2}${td}"/>
+          <add:horse_info i:val="${record}" key="record"/>
+        </case:_>
+        <default:_>
+        </default:_>
+      </switch:colname>
+      
+      <!--
       <if:_ bln:val="${colname==烙號}">
+      -->
+        <!--
         <then>
           <var:record str:val="${meeting}${race_num:D2}${td}"/>
           <add:horse_info i:val="${record}" key="record"/>
         </then>
+        -->
+        
         <!--
         <else>
           <if:_ bln:val="${colname==馬名}">
@@ -137,7 +155,9 @@
           </if:_>
         </else>
         -->
+      <!--
       </if:_>
+      -->
       <!--
       <dbg-prn:test str:val="${colname}: ${td}"/>
       -->
