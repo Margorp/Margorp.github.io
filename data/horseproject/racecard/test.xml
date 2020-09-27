@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config
+  xmlns:const="constant"
+  xmlns:list="list"
+  xmlns:dump="dump"
+  xmlns:str="string"
+>
+  <const:folder str:val="E:/Storage/Work/Database/Project/HorseProject/chinese/racecard/html/2020/10/01"/>
+  <dump:_ val="${folder}"/>
+</config>
