@@ -47,7 +47,7 @@
         <scp-call:_ xm:val="${meeting_script}"/>
         
         <for-each:race_num i:val="${race_nums}">
-          <prn-line:_ str:val="${race_num}"/>
+          <prn-line:_ str:val="race_num: ${race_num}"/>
 
           <!--
           <scp-call:_ xm:val="${getraceurl_script}"/>
