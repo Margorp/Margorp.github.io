@@ -56,7 +56,7 @@
   <list:files val="${folder}"
   <dump:_ val="${files}"/>
   
-  <doc-load:doc xm:val=$"{files[0]}"/>
+  <doc-load:doc html:val=$"{files[0]}"/>
   
   <sel:caches html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//thead/tr[1]/td"/>
   <var:colnames str_s:val="${caches}"/>
