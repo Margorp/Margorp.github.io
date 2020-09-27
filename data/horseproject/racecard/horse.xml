@@ -51,7 +51,8 @@
 
   <sel:caches html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//thead/tr[1]/td"/>
   <var:colnames str_s:val="${caches}"/>
-
+  <dump:_ val="${colnames}"/>
+  
   <sel:trs html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr"/>
   <for:i i:from="0" i:to="${trs::Length-1}">
     <const:horse_info obj:val="{}"/>
