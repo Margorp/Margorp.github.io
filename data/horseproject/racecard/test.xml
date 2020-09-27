@@ -3,6 +3,7 @@
   xmlns:const="constant"
   xmlns:var="variable"
   xmlns:list="list"
+  xmlns:doc-load="document-load"
   xmlns:dump="dump"
   xmlns:str="string"
   xmlns:file="file"
