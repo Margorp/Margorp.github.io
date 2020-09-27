@@ -67,6 +67,8 @@
       <switch:colname>
         <case:_ val="烙號">
           <sel:td html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/a"/>
+        </case:_>
+        <case:_ val="烙號">
           <var:record str:val="${meeting}${race_num:D2}${td}"/>
           <add:horse_info i:val="${record}" key="record"/>
         </case:_>
