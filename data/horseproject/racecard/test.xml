@@ -4,6 +4,7 @@
   xmlns:list="list"
   xmlns:dump="dump"
   xmlns:str="string"
+  xmlns:file="file"
 >
   <const:folder str:val="E:/Storage/Work/Database/Project/HorseProject/chinese/racecard/html/2020/10/01"/>
   <dump:_ val="${folder}"/>
