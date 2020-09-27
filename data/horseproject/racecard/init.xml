@@ -49,11 +49,13 @@
         <for-each:race_num i:val="${race_nums}">
           <prn-line:_ str:val="${race_num}"/>
 
+          <!--
           <scp-call:_ xm:val="${getraceurl_script}"/>
           <scp-call:_ xm:val="${getracepath_script}"/>
           
           <prn-line:_ str:val="${race_url}"/>          
           <prn-line:_ str:val="${race_path}"/>
+          -->
 
           <dl-async:doc html:val="${race_url}" id:find="mainContainer">
             <!--
