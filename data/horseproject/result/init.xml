@@ -96,20 +96,29 @@
 
               <scp-call:_ xm:val="${meeting_script}"/>
               <scp-call:_ xm:val="${race_script}"/>
-              <scp-call:_ xm:val="${horse_script}"/>
               <scp-call:_ xm:val="${report_script}"/>
+              <scp-call:_ xm:val="${horse_script}"/>
               <scp-call:_ xm:val="${odds_script}"/>
+              
+              <dump:_ val="${meeting_info}"/>
+              <dump:_ val="${race_info}"/>
+              <dump:_ val="${report_info}"/>
+              <dump:_ val="${horse_infos}"/>
+              <dump:_ val="${combination_info}"/>
+              <dump:_ val="${dividend_info}"/>
 
+              <!--
               <if:_ val="${race_num==1}">
                 <then>
                   <db:meeting_tblname ins:val="${meeting_info}" table="result.meeting"/>
                 </then>
-              </if:_>              
+              </if:_>
               <db:race_tblname ins:val="${race_info}" table="result.race"/>
               <db:report_tblname ins:val="${report_info}" table="result.report"/>
               <db:horse_tblname ins:val="${horse_infos}" table="result.horse"/>
               <db:combination_tblname ins:val="${combination_info}" table="result.combination"/>
               <db:dividend_tblname ins:val="${dividend_info}" table="result.dividend"/>
+              -->
               
             </dl-async:html>
 
