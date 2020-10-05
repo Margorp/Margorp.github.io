@@ -75,7 +75,7 @@
     <scp-call:_ xm:val="${getmeetingurl_script}"/>
 
     <dl-async:doc html:val="${url}" id:find="mainContainer">
-      <sel-ex:found html:val="${doc}" str:xpath="//table[contains(@class,'js_racecard')]//img"/>
+      <sel-ex:found html:val="${doc}" str:xpath="//table[contains(@class,'js_racecard')]//tr[1]//img"/>
       <if:_ bln:val="${found==true}">
         <then>
           <prn-line:_ val="date: ${date}"/>
