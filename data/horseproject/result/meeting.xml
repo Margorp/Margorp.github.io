@@ -37,7 +37,7 @@
 
     <const:meeting_info obj:val="{}"/>
 
-    <sel:srcs html:val="${doc}" attr_s:xpath="//table[contains(@class,'js_racecard')]//img" str_s:attr="src"/>
+    <sel:srcs html:val="${doc}" attr_s:xpath="//table[contains(@class,'js_racecard')]//tr[1]//img" str_s:attr="src"/>
     <reg-fil:srcs str_s:val="${srcs}" pattern="^[^\d]+(?'num'\d+)[^\d]+$"/>
     <reg-rep:race_nums i_s:val="${srcs}" pattern="^[^\d]+(?'num'\d+)[^\d]+$" replacement="${num}"/>
     <dbg-prn:test str_s:val="${race_nums}"/>
