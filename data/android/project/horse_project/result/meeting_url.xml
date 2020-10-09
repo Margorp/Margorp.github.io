@@ -13,5 +13,5 @@
   <const:venue str:val="ST"/>
   <const:race_num i:val="1"/>
   <var:url str:val="https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&amp;Racecourse=${venue}&amp;RaceNo=${race_num}"/>
-  <prn:_ val=${url}/>
+  <prn:_ val="${url}"/>
 </config>
