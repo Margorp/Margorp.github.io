@@ -3,8 +3,10 @@
   xmlns:const="constant"
   xmlns:env="environment"
   xmlns:db="database"
+  xmlns:for="for"
   xmlns:dump="dump"
   xmlns:str="string"
+  xmlns:dt="datetime"
   xmlns:query="query"
 >
   <env:now val="${now}"/>
