@@ -4,10 +4,17 @@
   xmlns:const="constant"
   xmlns:env="environment"
   xmlns:db="database"
+  xmlns:dl-async="download-async"
+  xmlns:sel="select"
+  xmlns:sel-ex="select-exists"
   xmlns:for="for"
+  xmlns:add="add"
+  xmlns:if="if"
   xmlns:dump="dump"
   xmlns:str="string"
   xmlns:dt="datetime"
+  xmlns:html="html"
+  xmlns:id="id"
   xmlns:query="query"
 >
   <env:now val="${now}"/>
@@ -19,8 +26,22 @@
   <var:last_date dt:val="${data[0][last_date]}"/>
   <dump:_ val="last_date: ${last_date}"/>
 
+  <const:meeting_dates val="[]"/>
   <for:date dt:from="${last_date+1}" dt:to="${now-1}">
+<!--
     <dump:_ val="${date}"/>
+    <var:url val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&Racecourse=${venue}&RaceNo=${race_num}"/>
+-->
+    <var:url val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}"/>
+    <dl-async:doc html:val="${url}" id:find="mainContainer">
+      <sel-ex:found html:val="${doc}" xpath="//div[@id='mainContainer']"/>
+      <if:_ val="${found==true}">
+        <then>
+          <add:meeting_dates val="${date}"/>
+        </then>
+      </if:_>
+    </dl-async:doc>
   </for:date>
+  <dump:_ val="${meeting_dates}"/>
 
 </config>
