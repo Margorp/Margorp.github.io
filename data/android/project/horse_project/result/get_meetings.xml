@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config
 >
+ 
   <env:now val="${now}"/>
+  <const:dbpath str:val="/storage/emulated/0/Android/data/com.companyname.standardlibrary_v3_androidapp/cache/data/horse_project/sqlite/result.db"/>
   <const:sql str:val="select max(meeting) from Meeting"/>
-  <db:result query:val="${sql}" type="sqlite"/>
+  <db:result query:val="${sql}" path="$dbpath" type="sqlite"/>
+  <dump:_ val="${result}"/>
 </config>
