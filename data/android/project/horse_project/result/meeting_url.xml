@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config
+  xmlns:const="constant"
+  xmlns:var="variable"
+  xmlns:prn="print"
+>
+  <const:year i:val="2020"/>
+  <const:month i:val="10"/>
+  <const:day i:val="1"/>
+  <const:venue str:val="ST"/>
+  <const:race_num i:val="1"/>
+  <var:url str:val="https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&amp;Racecourse=${venue}&amp;RaceNo=${race_num}"/>
+  <prn:_ val=${url}/>
+</config>
