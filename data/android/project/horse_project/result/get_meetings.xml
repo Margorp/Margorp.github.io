@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config
+  xmlns:var="variable"
   xmlns:const="constant"
   xmlns:env="environment"
   xmlns:db="database"
