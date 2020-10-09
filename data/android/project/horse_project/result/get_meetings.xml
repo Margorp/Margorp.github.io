@@ -32,7 +32,7 @@
     <dump:_ val="${date}"/>
     <var:url val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=${year:D4}/${month:D2}/${day:D2}&Racecourse=${venue}&RaceNo=${race_num}"/>
 -->
-    <var:url val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=${date[year]:D4}/${date[month]:D2}/${date[day]:D2}"/>
+    <var:url val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=${date::Year:D4}/${date::Month:D2}/${date::Day:D2}"/>
     <dl-async:doc html:val="${url}" id:find="mainContainer">
       <sel-ex:found html:val="${doc}" xpath="//div[@id='mainContainer']"/>
       <if:_ val="${found==true}">
