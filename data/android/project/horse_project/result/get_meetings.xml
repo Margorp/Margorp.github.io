@@ -13,5 +13,5 @@
 
   <const:sql str:val="select max(meeting) as last_meeting from Meeting"/>
   <db:data query:val="${sql}" path="${dbpath}" type="sqlite"/>
-  <dump:_ val="${data[last_meeting]}"/>
+  <dump:_ val="${data}"/>
 </config>
