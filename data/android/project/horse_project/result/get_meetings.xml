@@ -14,4 +14,9 @@
   <const:sql str:val="select max(date) as last_date from Meeting"/>
   <db:data query:val="${sql}" path="${dbpath}" type="sqlite"/>
   <dump:_ val="last_date: ${data[0][last_date]}"/>
+
+  <for:date dt:from="${last_date+1}" dt:to="${now-1}">
+    <dump:_ val="${date}"/>
+  </for:date>
+
 </config>
