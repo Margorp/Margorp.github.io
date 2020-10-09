@@ -9,7 +9,8 @@
 >
   <env:now val="${now}"/>
   <const:dbpath str:val="/storage/emulated/0/Android/data/com.companyname.standardlibrary_v3_androidapp/cache/data/horse_project/sqlite/result.db"/>
-  <const:sql str:val="select max(meeting) from Meeting"/>
-  <db:result query:val="${sql}" path="${dbpath}" type="sqlite"/>
-  <dump:_ val="${result}"/>
+  <dump:_ val="${now}"/>
+  <const:sql str:val="select max(meeting) as last_meeting from Meeting"/>
+  <db:data query:val="${sql}" path="${dbpath}" type="sqlite"/>
+  <dump:_ val="last_meeting: ${data[last_meeting]}"/>
 </config>
