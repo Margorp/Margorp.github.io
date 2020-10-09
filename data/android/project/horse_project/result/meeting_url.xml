@@ -3,6 +3,9 @@
   xmlns:const="constant"
   xmlns:var="variable"
   xmlns:prn="print"
+        
+  xmlns:i="int"
+  xmlns:str="string"        
 >
   <const:year i:val="2020"/>
   <const:month i:val="10"/>
