@@ -115,9 +115,7 @@
           <if:_ bln:val="${found==true}">
             <then>
               <sel:divs html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div"/>
-              <dbg-prn:test obj:val="${divs::Length-1}"/>
               <for:k i:from="0" i:to="${divs::Length-1}">
-                <dbg-prn:test obj:val="${k}"/>
                 <sel:div html:val="${doc}" str:xpath="//table[contains(@class,'draggable')]//tbody/tr[${i+1}]/td[${j+1}]/div/div[${k+1}]"/>
                 <trim:div str:val="${div}"/>
                 <add:run_pos obj:val="${div}"/>
