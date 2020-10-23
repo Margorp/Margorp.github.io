@@ -45,6 +45,7 @@
   xmlns:order="order"
   xmlns:ref="reference"
   xmlns:doc-load="document-load"
+  xmlns:reg-mat="regex-match"
 >
   <const:horse_infos obj:val="[]"/>
   
