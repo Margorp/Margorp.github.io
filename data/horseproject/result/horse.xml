@@ -45,8 +45,11 @@
   xmlns:order="order"
   xmlns:ref="reference"
 >
-
   <const:horse_infos obj:val="[]"/>
+  
+  <const:url str:val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=2020/10/01&amp;Racecourse=ST&amp;RaceNo=5"/>
+  <dl-async:html str:val="${url}">
+  <doc-load:doc html:val="${html}"/>
 
   <sel:caches html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//thead/tr/td"/>
   <var:colnames str_s:val="${caches}"/>
@@ -62,6 +65,15 @@
       <var:colname str:val="${colnames[${j}]}"/>
       
       <switch:_ str:val="${colname}">
+        <case str:val="名次">
+          <reg-mat:found val="${colname}" pattern="^&amp;nbsp;(?'num'\d+)$"/>
+          <if:_ val="${found==true}">
+            <then>
+              <reg-rep:td val="${colname}" pattern="^&amp;nbsp;(?'num'\d+)$" replacement="%{num}"/>
+            </then>
+          </if:_>
+          <trim:td val="${td}"/>
+        </case>
         <case str:val="馬名">
           <trim:td str:val="${tds[${j}]}"/>
           <reg-rep:td str:val="${td}" pattern="^\((?'brand_num'.*)\)$" replacement="${brand_num}"/>
@@ -167,9 +179,18 @@
     <var:temp i:val="${horse_info[名次]}"/>
     <if:_ val="${temp==0}">
       <then>
-        <ren:horse_info obj:val="{
-            名次:意外
+        <reg-mat:found str:val="${horse_info[名次]}" pattern="^(?'num'\d+)(?'accident'[^\d+]馬)$"/>
+        <if:_ val="${found==true}">
+          <then>
+            <sel:temp i:val="${horse_info[名次]}" pattern="^(?'num'\d+)(?'accident'[^\d+]馬)$" replacement="${num}"/>
+            <add:horse_info val="${temp}" key="名次"/>
+          </then>
+          <else>
+            <ren:horse_info obj:val="{
+              名次:意外
             }"/>
+          </else>
+        </if:_>
       </then>
       <else>
         <add:horse_info val="${temp}" key="名次"/>
@@ -202,7 +223,7 @@
 
     <ren:horse_info obj:val="{
         頭馬距離:原頭馬距離
-        }"/>
+    }"/>
 
     <var:temp str:val="${horse_info[原頭馬距離]}"/>
     <fact2dbl:temp str:val="${temp}"/>
@@ -224,6 +245,8 @@
   <!--
   -->
   <!--
-  <dump:_ obj_s:val="${horse_infos}"/>
   -->
+  <dump:_ obj_s:val="${horse_infos}"/>
+    
+  </dl-async:html>
 </config>
