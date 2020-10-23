@@ -52,6 +52,7 @@
   <const:meeting i:val="20201001"/>
   <const:race_num i:val="5"/>
   <const:venue str:val="ST"/>
+  <const:race i:val="2020100105"/>
   
   <const:url str:val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=2020/10/01&amp;Racecourse=ST&amp;RaceNo=5"/>
   <dl-async:html str:val="${url}" id:find="mainContainer">
