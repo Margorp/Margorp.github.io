@@ -113,7 +113,7 @@
         <default>
           <trim:td str:val="${tds[${j}]}"/>
         </default>
-      </switch>
+      </switch:_>
       
       <!--
       <if:_ bln:val="${colname==馬名}">
