@@ -258,12 +258,9 @@
     <var:temp obj:val="${odds_order[${i}]}"/>
     <ref:horse_infos val="${temp}" index="${i}" key="獨贏排序"/>
   </for:i>
+  
   <!--
-  -->
-  <!--
-  -->
   <dump:_ obj_s:val="${horse_infos}"/>
-  <!--
   </dl-async:html>
   -->
 </config>
