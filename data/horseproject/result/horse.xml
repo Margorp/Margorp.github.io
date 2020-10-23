@@ -50,7 +50,7 @@
   <const:horse_infos obj:val="[]"/>
   
   <const:url str:val="https://racing.hkjc.com/racing/information/chinese/Racing/LocalResults.aspx?RaceDate=2020/10/01&amp;Racecourse=ST&amp;RaceNo=5"/>
-  <dl-async:html str:val="${url}">
+  <dl-async:html str:val="${url}" id:find="mainContainer">
   <doc-load:doc html:val="${html}"/>
 
   <sel:caches html:val="${doc}" str_s:xpath="//table[contains(@class,'draggable')]//thead/tr/td"/>
