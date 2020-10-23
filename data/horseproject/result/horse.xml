@@ -72,13 +72,25 @@
       
       <switch:_ str:val="${colname}">
         <case str:val="名次">
-          <reg-mat:found val="${colname}" pattern="^&amp;nbsp;(?'num'\d+)$"/>
+          <trim:td str:val="${tds[${j}]}"/>
+          <reg-mat:found val="${td}" pattern="^&amp;nbsp;(?'num'\d+)$"/>
           <if:_ val="${found==true}">
             <then>
-              <reg-rep:td val="${colname}" pattern="^&amp;nbsp;(?'num'\d+)$" replacement="%{num}"/>
+              <reg-rep:td val="${td}" pattern="^&amp;nbsp;(?'num'\d+)$" replacement="%{num}"/>
+              <trim:td val="${td}"/>
             </then>
+            <else>
+              <reg-mat:found val="${td}" pattern="^(?'num'\d+)[^\d]+頭馬$"/>
+              <if:_ val="${found==true}">
+                <then>
+                  <reg-rep:td val="${td}" pattern="^&amp;nbsp;(?'num'\d+)$" replacement="%{num}"/>
+                  <trim:td val="${td}"/>
+                </then>
+                <else>
+                </else>
+              </if:_>
+            </else>
           </if:_>
-          <trim:td val="${td}"/>
         </case>
         <case str:val="馬名">
           <trim:td str:val="${tds[${j}]}"/>
