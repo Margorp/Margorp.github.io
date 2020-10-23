@@ -44,6 +44,7 @@
   xmlns:fact2dbl="faction-to-double"
   xmlns:order="order"
   xmlns:ref="reference"
+  xmlns:doc-load="document-load"
 >
   <const:horse_infos obj:val="[]"/>
   
