@@ -83,7 +83,7 @@
               <reg-mat:found val="${td}" pattern="^(?'num'\d+)[^\d]+頭馬$"/>
               <if:_ val="${found==true}">
                 <then>
-                  <reg-rep:td val="${td}" pattern="^&amp;nbsp;(?'num'\d+)$" replacement="${num}"/>
+                  <reg-rep:td val="${td}" pattern="^(?'num'\d+)[^\d]+頭馬$" replacement="${num}"/>
                   <trim:td val="${td}"/>
                 </then>
                 <else>
