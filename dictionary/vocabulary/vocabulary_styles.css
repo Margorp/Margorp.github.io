@@ -4,9 +4,9 @@ table,th,td{
     table-layout:fixed;
 }
 b{color:red;}
-.column{color:black;}
-.content{color:black;}
-.word{color:black;}
+.col{color:black;}
+.text{color:black;}
+.vocab{color:black;}
 .pron{color:black;}
 .strong{color:black;}
 .weak{color:black;}
