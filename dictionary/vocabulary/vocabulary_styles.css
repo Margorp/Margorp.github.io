@@ -8,7 +8,7 @@ b{color:red;}
 .col{color:black;}
 .cell{color:black;}
 .text{color:black;}
-.vocab{color:black;}
+.vocab{color:black; align:center; text-align:center;}
 .pron{color:black;}
 .strong{color:black;}
 .weak{color:black;}
