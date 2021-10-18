@@ -3,6 +3,7 @@ table,th,td{
     color:cyan;
     table-layout:fixed;
 }
+span{color:black}
 b{color:red;}
 .colname{color:black;}
 .cell{color:black;}
