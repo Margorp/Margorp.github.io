@@ -1,6 +1,5 @@
 table,th,td{
     border:1px solid black;
-    width:100%;
     table-layout:fixed;
 }
 b{color:red;}
