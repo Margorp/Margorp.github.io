@@ -1,1 +1,20 @@
-table,tr,td {border:1px; color:black;}
+table,th,td{
+    border:1px solid black;
+    width:100%;
+    table-layout:fixed;
+}
+b{color:red;}
+#red{color:red;}
+.red{color:red;}
+.column{color:black;}
+.content{color:black;}
+.word{color:black;}
+.pron{color:black;}
+.strong{color:black;}
+.weak{color:black;}
+.uk{color:black;}
+.us{color:black;}
+.type{color:black;}
+.def{color:black;}
+.eg{color:black;}
+.trans{color:black;}
