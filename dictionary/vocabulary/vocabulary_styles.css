@@ -3,12 +3,12 @@ table,th,td{
     color:cyan;
     table-layout:fixed;
 }
-span.vocab{color:black; align:center; text-align:center; vertical-align:middle;}
 b{color:red;}
 .col{color:black;}
 .cell{color:black;}
 .text{color:black;}
-.vocab{color:black; align:center; text-align:center;}
+.center{color:black; align:center; text-align:center; vertical-align:middle;}
+.vocab{color:black;}
 .pron{color:black;}
 .strong{color:black;}
 .weak{color:black;}
