@@ -3,7 +3,7 @@ table,th,td{
     color:cyan;
     table-layout:fixed;
 }
-span{color:black;}
+span.vocab{color:black; align:center; text-align:center; vertical-align:middle;}
 b{color:red;}
 .col{color:black;}
 .cell{color:black;}
