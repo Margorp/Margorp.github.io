@@ -4,25 +4,25 @@
 
 <xsl:template match="/">
   <html>
-  <body>
-  <h1>Dictionary</h1>
-  <table border="1">
-    <tr>
-      <th>Vocabulary</th>
-      <th>Pronunciation</th>
-      <th>Type</th>
-      <th>Level</th>
-      <th>Definition</th>
-      <th>Example</th>
-    </tr>
-    <xsl:for-each select="dictionary/word">
-    <tr>
-      <td><xsl:value-of select="vocabulary"/></td>
-      <td><xsl:value-of select="type"/></td>
-    </tr>
-    </xsl:for-each>
-  </table>
-  </body>
+    <body>
+      <h1>Dictionary</h1>
+      <table border="1">
+        <tr>
+          <th>Vocabulary</th>
+          <th>Pronunciation</th>
+          <th>Type</th>
+          <th>Level</th>
+          <th>Definition</th>
+          <th>Example</th>
+        </tr>
+        <xsl:for-each select="dictionary/word">
+        <tr>
+          <td><xsl:value-of select="vocabulary"/></td>
+          <td><xsl:value-of select="type"/></td>
+        </tr>
+        </xsl:for-each>
+      </table>
+    </body>
   </html>
 </xsl:template>
 
