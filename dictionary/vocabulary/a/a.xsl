@@ -28,7 +28,14 @@
           <td><xsl:value-of select="type"/></td>
           <td><xsl:value-of select="level"/></td>
           <td><xsl:value-of select="definition"/></td>
-          <td><xsl:value-of select="example"/></td>
+          <td>
+            <table>
+              <xsl:for-each select="dictionary/word">
+              <tr>
+                <td><xsl:value-of select="example"/></td>
+              </tr>
+            </table>
+          </td>
         </tr>
         </xsl:for-each>
       </table>
