@@ -8,15 +8,15 @@
       <h1>Dictionary</h1>
       <table border="1">
         <tr>
-          <th>Vocabulary</th>
-          <th>Pronunciation/strong/uk</th>
-          <th>Pronunciation/weak/uk</th>
-          <th>Pronunciation/strong/us</th>
-          <th>Pronunciation/weak/us</th>
+          <th>Vocab</th>
+          <th>UK(s)</th>
+          <th>UK(w)</th>
+          <th>US(s)</th>
+          <th>US(w)</th>
           <th>Type</th>
-          <th>Level</th>
-          <th>Definition</th>
-          <th>Example</th>
+          <th>Lv</th>
+          <th>Def</th>
+          <th>Eg</th>
         </tr>
         <xsl:for-each select="dictionary/word">
         <tr>
