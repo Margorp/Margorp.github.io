@@ -18,7 +18,7 @@
         <xsl:for-each select="dictionary/word">
         <tr>
           <td><xsl:value-of select="vocabulary"/></td>
-          <td><xsl:value-of select="pronunciation"/></td>
+          <td><xsl:value-of select="pronunciation/strong/uk"/></td>
           <td><xsl:value-of select="type"/></td>
           <td><xsl:value-of select="level"/></td>
           <td><xsl:value-of select="definition"/></td>
