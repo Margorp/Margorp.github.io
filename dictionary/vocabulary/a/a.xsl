@@ -30,9 +30,9 @@
           <td><xsl:value-of select="definition"/></td>
           <td>
             <table>
-              <xsl:for-each select="dictionary/word">
+              <xsl:for-each select="dictionary/word/example">
               <tr>
-                <td><xsl:value-of select="example"/></td>
+                <td><xsl:value-of select=""/></td>
               </tr>
             </table>
           </td>
