@@ -16,25 +16,15 @@
     <type>determiner</type>
     <level>A1</level>
     <definition>one not particular</definition>
-    <example>There's a book.</example>
-    <example>There's a book.</example>
-    <example>There's a book.</example>
+    <example>
+      <example>There's a book1.</example>
+      <example>There's a book2.</example>
+      <example>There's a book3.</example>
+    </example>
+    <translate>
+      <translate>There's a book1.</translate>
+      <translate>There's a book2.</translate>
+      <translate>There's a book3.</translate>
+    </translate>
   </word>  
-  <word>
-    <vocabulary>a</vocabulary>
-    <pronunciation>
-      <strong>
-        <uk>eɪ</uk>
-        <us>eɪ</us>
-      </strong>
-      <weak>      
-        <uk>ə</uk>
-        <us>ə</us>
-      </weak>
-    </pronunciation>
-    <type>determiner</type>
-    <level>A1</level>
-    <definition>one set of (two related objects)</definition>
-    <example>Can you give me a fork and saucer.</example>
-  </word>
 </dictionary>
