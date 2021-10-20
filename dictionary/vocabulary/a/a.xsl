@@ -34,6 +34,7 @@
               <tr>
                 <td><xsl:value-of select="example"/></td>
               </tr>
+              </xsl:for-each>
             <table>
           </td>
         </tr>
