@@ -17,14 +17,14 @@
     
     <button onclick="click_me()">Click</button>
     
-    <p id="test"><h1>Test</h1></p>
+    <p><h1><span id="test">Test</span></h1></p>
   
     <script type="text/javascript">
       function click_me() {
         //$("p").hide();
-        //document.getElementById("test").style.display = "none";
+        document.getElementById("test").style.display = "none";
         //alert("hello");
-        document.getElementsByTagName("p").innerText = "";
+        document.getElementById("test").innerText = "";
       }
     </script>
   
