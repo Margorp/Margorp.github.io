@@ -1,5 +1,6 @@
 <!DOCTYPE>
 <html>
+  
   <head>
     <!--
     <script src="../jquery.js"></script>
@@ -12,82 +13,12 @@
     -->
   </head>
   
-  <style>
-  table,th,td {
-    border : 1px solid black;
-    border-collapse: collapse;
-  }
-  th,td {
-    padding: 5px;
-  }
-  </style>
-  
   <body>
-  
-    <h1>The XMLHttpRequest Object</h1>
-
-    <form action=""> 
-    <select name="customers" onchange="showCustomer(this.value)">
-    <option value="">Select a customer:</option>
-    <option value="ALFKI">Alfreds Futterkiste</option>
-    <option value="NORTS ">North/South</option>
-    <option value="WOLZA">Wolski Zajazd</option>
-    </select>
-    </form>
-    <br>
-    <div id="txtHint">Customer info will be listed here...</div>
-
-    <script>
-    function showCustomer(str) {
-      var xhttp;    
-      if (str == "") {
-        document.getElementById("txtHint").innerHTML = "";
-        return;
-      }
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          document.getElementById("txtHint").innerHTML = this.responseText;
-        }
-      };
-      xhttp.open("GET", "getcustomer.php?q="+str, true);
-      xhttp.send();
-    }
-    </script>
     
-    <div id="container">
-    <div class="block">
-    <p id="first">
-      Some text here
-    </p>
-    <ul id="someList">
-      <li class="item"></li>
-      <li class="item selected" id="mainItem">Oh, hello there!</li>
-      <li class="item"></li>
-      <li class="item"></li>
-    </ul>
-    </div>
-    </div>
-    
-    <script>
-      console.profile() ;
-
-      // Our code here
-      var ele = $("#somethingThatisNotHere");
-      ele.text("Some text").slideUp(300).addClass("editing");
-      $("#mainItem");
-
-      console.profileEnd();
-    </script>
-
-    
-    <p id="test"/>
+    <p id="test"><h1>Test</h1></p>
   
     <script type="text/javascript">
-      let text = "hello world!";
-      let pattern = /Hello/g;
-      let result = pattern.test(text);
-      document.getElementById("test").innerHTML = result + "<br/>";      
+      $("p").hide();
     </script>
   
     <h1><a href="./lesson_01.html">Lesson 1 Letters</a></h1>
@@ -101,5 +32,7 @@
     <h1><a href="./lesson_08.html">Lesson 8 </a></h1>
     <h1><a href="./lesson_09.html">Lesson 9</a></h1>
     <h1><a href="./lesson_10.html">Lesson 10</a></h1>
+    
   </body>
+  
 </html>
