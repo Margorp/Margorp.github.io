@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='char_constant' type='char' value="'a'"/>
+    <constant:set name='string_constant' type='string' value='"a"'/>
+    <constant:set name='int_constant' type='int' value='7i'/>
+    <constant:set name='float_constant' type='float' value='3.14159f'/>
+    <constant:set name='bool_constant' type='bool' value='true'/>
+    <constant:set name='date_constant' type='date' value='#1997/7/1#'/>
+    <constant:set name='time_constant' type='time' value='#2:45:00#'/>
+    <constant:set name='list_int_constant' type='list' value='[1,2,3]'/>
+    <constant:set name='list_float_constant' type='list' value='[3.14159,2.2545,3.1234]'/>
+    <constant:set name='dict_constant' type='dict' value='{"a":97;"b":98;"c":99}'/>
+    <constant:set name='table_constant' type='datatable' value='["char","asc"]{"char":"a";"asc":97i}{"char":"b";"asc":98i}{"char":"c";"asc":99i}'/>
+
+    <variable:set name='string_variable' type='string' value='"${char_constant} ${string_constant}"'/>
+    <dump:_ type='string' value='${string_variable}'/>
+
+    <variable:set name='int_variable' type='string' value='"${int_constant:D3}"'/>
+    <dump:_ type='string' value='${int_variable}'/>
+    <variable:set name='float_variable' type='string' value='"${float_constant:F3}"'/>
+    <dump:_ type='string' value='${float_variable}'/>
+    <variable:set name='list_int_variable' type='list' value='"${list_int_constant:D3}"'/>
+    <dump:_ type='list' value='${list_int_variable}'/>
+    <variable:set name='list_float_variable' type='list' value='"${list_float_constant:F3}"'/>
+    <dump:_ type='list' value='${list_float_variable}'/>
+
+    <variable:set name='dict_value_variable' type='int' value='"${dict_constant["a"]}"'/>
+    <dump:_ type='int' value='${dict_value_variable}'/>
+    <variable:set name='dict_value_variable' type='int' value='"${dict_constant["${string_constant}"]}"'/>
+    <dump:_ type='int' value='${dict_value_variable}'/>
+
+    <dump:_ type='datatable' value='${table_constant}'/>
+    <variable:set name='char' type='string' value='"${table_constant[1][0]}"'/>
+    <variable:set name='ascii' type='int' value='"${table_constant[1][1]}"'/>
+    <dump:_ type='string' value='"${char}: ${ascii}"'/>
+    
+    <variable:set name='int_constant_variable' type='int' value='"${int_constant*10}"'/>
+    <dump:_ type='int' value='${int_constant_variable}'/>
+    <variable:set name='int_constant_variable' type='int' value='"${int_constant+10}"'/>
+    <dump:_ type='int' value='${int_constant_variable}'/>
+    <variable:set name='int_constant_variable' type='int' value='"${int_constant-10}"'/>
+    <dump:_ type='int' value='${int_constant_variable}'/>
+    <variable:set name='float_constant_variable' type='float' value='"${int_constant/3}"'/>
+    <dump:_ type='float' value='${float_constant_variable:F3}'/>
+
+    <variable:set name='string_variable_length' type='int' value='${string_constant::Length}'/>
+    <dump:_ type='int' value='${string_variable_length}'/>
+    <constant:set name='parameters' type='list' value="['a']"/>
+    <constant:set name='types' type='list' value='["char"]'/>
+    <constant:set name='letters' type='string' value='"abcde"'/>
+    <variable:set name='letters_contains_a' type='bool' value='${letters(types)::Contains(parameters)}'/>
+    <print:line type='string' value='"letters_contains_a: ${letters_contains_a}"'/>
+
+    <constant:set name='types' type='list' value='["datarows"]'/>
+    <constant:set name='parameters' type='list' value="[]"/>
+    <variable:set name='rows' type='object' value='${table_constant(types)::Rows(parameters)}'/>
+    <constant:set name='types' type='list' value='["int"]'/>
+    <constant:set name='parameters' type='list' value="[]"/>
+    <variable:set name='count' type='int' value='${rows(types)::Count(parameters)}'/>
+    <print:line type='string' value='"count: ${count}"'/>
+
+    <constant:set name='left' type='int' value='5i'/>
+    <constant:set name='right' type='int' value='10i'/>
+    <variable:set name='a' type='bool' value='${left}==${right}'/>
+    <variable:set name='b' type='bool' value='${left}!=${right}'/>
+    <variable:set name='c' type='bool' value='${left}&gt;=${right}'/>
+    <variable:set name='d' type='bool' value='${left}&lt;=${right}'/>
+    <variable:set name='e' type='bool' value='${left}&gt;${right}'/>
+    <variable:set name='f' type='bool' value='${left}&lt;${right}'/>
+    <dump:_ type='bool' value="${a}"/>
+    <dump:_ type='bool' value="${b}"/>
+    <dump:_ type='bool' value="${c}"/>
+    <dump:_ type='bool' value="${d}"/>
+    <dump:_ type='bool' value="${e}"/>
+    <dump:_ type='bool' value="${f}"/>
+
+    <variable:set name="A" type="bool" value='"a"=="a"'/>
+    <variable:set name="B" type="bool" value="1i==1i"/>
+    <variable:set name="C" type="bool" value="3.14f==3.14f"/>
+    <dump:_ type="bool" value="${A}"/>
+    <dump:_ type="bool" value="${B}"/>
+    <dump:_ type="bool" value="${C}"/>
+
+    <constant:set name='A' type='string' value='"a"'/>
+    <constant:set name='B' type='int' value='1i'/>
+    <constant:set name='C' type='float' value='3.14f'/>
+
+    <variable:set name="A1" type="bool" value='"a"==${A}'/>
+    <variable:set name="A2" type="bool" value='${A}=="a"'/>
+    <variable:set name="A3" type="bool" value='${A}==${A}'/>
+    <variable:set name="B1" type="bool" value='1i==${B}'/>
+    <variable:set name="B2" type="bool" value='${B}==1i'/>
+    <variable:set name="B3" type="bool" value='${B}==${B}'/>
+    <variable:set name="C1" type="bool" value='3.14f==${C}'/>
+    <variable:set name="C2" type="bool" value='${C}==3.14f'/>
+    <variable:set name="C3" type="bool" value='${C}==${C}'/>
+    <dump:_ type="bool" value="${A1}"/>
+    <dump:_ type="bool" value="${A2}"/>
+    <dump:_ type="bool" value="${A3}"/>
+    <dump:_ type="bool" value="${B1}"/>
+    <dump:_ type="bool" value="${B2}"/>
+    <dump:_ type="bool" value="${B3}"/>
+    <dump:_ type="bool" value="${C1}"/>
+    <dump:_ type="bool" value="${C2}"/>
+    <dump:_ type="bool" value="${C3}"/>
+    
+  </main>
+</program>
