@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <program version='1.0'
 >
   <reference/>
@@ -17,42 +17,66 @@
 
     <variable:set name='string_variable' type='string' value='"${char_constant} ${string_constant}"'/>
     <dump:_ type='string' value='${string_variable}'/>
+    <debug:print value='${string_variable}=="a a"'/>
 
     <variable:set name='int_variable' type='string' value='"${int_constant:D3}"'/>
     <dump:_ type='string' value='${int_variable}'/>
+    <debug:print value='${int_variable}=="007"'/>
+
     <variable:set name='float_variable' type='string' value='"${float_constant:F3}"'/>
     <dump:_ type='string' value='${float_variable}'/>
+    <debug:print value='${float_variable}=="3.142"'/>
+
     <variable:set name='list_int_variable' type='list' value='"${list_int_constant:D3}"'/>
     <dump:_ type='list' value='${list_int_variable}'/>
+    <debug:print value='${list_int_variable}==["001","002","003"]'/>
+
     <variable:set name='list_float_variable' type='list' value='"${list_float_constant:F3}"'/>
     <dump:_ type='list' value='${list_float_variable}'/>
+    <debug:print value='${list_float_variable}==["3.142","2.254","3.123"]'/>
 
     <variable:set name='dict_value_variable' type='int' value='"${dict_constant["a"]}"'/>
     <dump:_ type='int' value='${dict_value_variable}'/>
+    <debug:print value='${dict_value_variable}==97'/>
+    
     <variable:set name='dict_value_variable' type='int' value='"${dict_constant["${string_constant}"]}"'/>
     <dump:_ type='int' value='${dict_value_variable}'/>
+    <debug:print value='${dict_value_variable}==97'/>
 
     <dump:_ type='datatable' value='${table_constant}'/>
     <variable:set name='char' type='string' value='"${table_constant[1][0]}"'/>
     <variable:set name='ascii' type='int' value='"${table_constant[1][1]}"'/>
-    <dump:_ type='string' value='"${char}: ${ascii}"'/>
-    
+    <variable:set name='char_ascii' type='string' value='"${char}: ${ascii}"'/>
+    <dump:_ type='string' value='"${char_ascii}"'/>
+    <debug:print value='${char_ascii}=="b: 98"'/>
+
     <variable:set name='int_constant_variable' type='int' value='"${int_constant*10}"'/>
     <dump:_ type='int' value='${int_constant_variable}'/>
+    <debug:print value='${int_constant_variable}==70'/>
+
     <variable:set name='int_constant_variable' type='int' value='"${int_constant+10}"'/>
     <dump:_ type='int' value='${int_constant_variable}'/>
+    <debug:print value='${int_constant_variable}==17'/>
+
     <variable:set name='int_constant_variable' type='int' value='"${int_constant-10}"'/>
     <dump:_ type='int' value='${int_constant_variable}'/>
+    <debug:print value='${int_constant_variable}==-3'/>
+
     <variable:set name='float_constant_variable' type='float' value='"${int_constant/3}"'/>
-    <dump:_ type='float' value='${float_constant_variable:F3}'/>
+    <variable:set name='string_float_constant_variable' type='string' value='${float_constant_variable:F3}'/>
+    <dump:_ type='float' value='${string_float_constant_variable}'/>
+    <debug:print value='${string_float_constant_variable}=="2.333"'/>
 
     <variable:set name='string_variable_length' type='int' value='${string_constant::Length}'/>
     <dump:_ type='int' value='${string_variable_length}'/>
+    <debug:print value='${string_variable_length}==1'/>
+
     <constant:set name='parameters' type='list' value="['a']"/>
     <constant:set name='types' type='list' value='["char"]'/>
     <constant:set name='letters' type='string' value='"abcde"'/>
     <variable:set name='letters_contains_a' type='bool' value='${letters(types)::Contains(parameters)}'/>
     <print:line type='string' value='"letters_contains_a: ${letters_contains_a}"'/>
+    <debug:print value='${letters_contains_a}==true'/>
 
     <constant:set name='types' type='list' value='["datarows"]'/>
     <constant:set name='parameters' type='list' value="[]"/>
@@ -61,6 +85,7 @@
     <constant:set name='parameters' type='list' value="[]"/>
     <variable:set name='count' type='int' value='${rows(types)::Count(parameters)}'/>
     <print:line type='string' value='"count: ${count}"'/>
+    <debug:print value='${count}==3'/>
 
     <constant:set name='left' type='int' value='5i'/>
     <constant:set name='right' type='int' value='10i'/>
@@ -70,19 +95,19 @@
     <variable:set name='d' type='bool' value='${left}&lt;=${right}'/>
     <variable:set name='e' type='bool' value='${left}&gt;${right}'/>
     <variable:set name='f' type='bool' value='${left}&lt;${right}'/>
-    <dump:_ type='bool' value="${a}"/>
-    <dump:_ type='bool' value="${b}"/>
-    <dump:_ type='bool' value="${c}"/>
-    <dump:_ type='bool' value="${d}"/>
-    <dump:_ type='bool' value="${e}"/>
-    <dump:_ type='bool' value="${f}"/>
+    <dump:_ type='bool' value="${a}"/> <debug:print value='${a}==false'/>
+    <dump:_ type='bool' value="${b}"/> <debug:print value='${b}==true'/>
+    <dump:_ type='bool' value="${c}"/> <debug:print value='${c}==false'/>
+    <dump:_ type='bool' value="${d}"/> <debug:print value='${d}==true'/>
+    <dump:_ type='bool' value="${e}"/> <debug:print value='${e}==false'/>
+    <dump:_ type='bool' value="${f}"/> <debug:print value='${f}==true'/>
 
     <variable:set name="A" type="bool" value='"a"=="a"'/>
     <variable:set name="B" type="bool" value="1i==1i"/>
     <variable:set name="C" type="bool" value="3.14f==3.14f"/>
-    <dump:_ type="bool" value="${A}"/>
-    <dump:_ type="bool" value="${B}"/>
-    <dump:_ type="bool" value="${C}"/>
+    <dump:_ type="bool" value="${A}"/> <debug:print value='${A}==true'/>
+    <dump:_ type="bool" value="${B}"/> <debug:print value='${B}==true'/>
+    <dump:_ type="bool" value="${C}"/> <debug:print value='${C}==true'/>
 
     <constant:set name='A' type='string' value='"a"'/>
     <constant:set name='B' type='int' value='1i'/>
@@ -97,15 +122,15 @@
     <variable:set name="C1" type="bool" value='3.14f==${C}'/>
     <variable:set name="C2" type="bool" value='${C}==3.14f'/>
     <variable:set name="C3" type="bool" value='${C}==${C}'/>
-    <dump:_ type="bool" value="${A1}"/>
-    <dump:_ type="bool" value="${A2}"/>
-    <dump:_ type="bool" value="${A3}"/>
-    <dump:_ type="bool" value="${B1}"/>
-    <dump:_ type="bool" value="${B2}"/>
-    <dump:_ type="bool" value="${B3}"/>
-    <dump:_ type="bool" value="${C1}"/>
-    <dump:_ type="bool" value="${C2}"/>
-    <dump:_ type="bool" value="${C3}"/>
+    <dump:_ type="bool" value="${A1}"/> <debug:print value='${A1}==true'/>
+    <dump:_ type="bool" value="${A2}"/> <debug:print value='${A2}==true'/>
+    <dump:_ type="bool" value="${A3}"/> <debug:print value='${A3}==true'/>
+    <dump:_ type="bool" value="${B1}"/> <debug:print value='${B1}==true'/>
+    <dump:_ type="bool" value="${B2}"/> <debug:print value='${B2}==true'/>
+    <dump:_ type="bool" value="${B3}"/> <debug:print value='${B3}==true'/>
+    <dump:_ type="bool" value="${C1}"/> <debug:print value='${C1}==true'/>
+    <dump:_ type="bool" value="${C2}"/> <debug:print value='${C2}==true'/>
+    <dump:_ type="bool" value="${C3}"/> <debug:print value='${C3}==true'/>
     
   </main>
 </program>
