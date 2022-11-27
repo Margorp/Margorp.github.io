@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='list_constant' type='list' value='["a","b","c","d"]'/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["a","b","c","d"]'/>
+
+    <list:add name="list_constant" type="list" value='"e"'/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["a","b","c","d","e"]'/>
+
+    <list:remove name="list_constant" type="list" value='"c"'/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["a","b","d","e"]'/>
+
+    <list:remove-at name="list_constant" type="list" index='2i'/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["a","b","e"]'/>
+
+    <list:insert name="list_constant" type="list" index='1i' value='"NEW"'/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["a","NEW","b","e"]'/>
+
+    <list:sort name="list_constant" type="list"/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["a","b","e","NEW"]'/>
+
+    <list:reverse name="list_constant" type="list"/>
+    <dump:_ type="list" value="${list_constant}"/>
+    <debug:print type="list" value='${list_constant}==["NEW","e","b","a"]'/>
+  </main>
+</program>
