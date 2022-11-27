@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='dict_constant' type='dict' value='{"a":97;"b":98;"c":99}'/>
+    <dump:_ type="dict" value="${dict_constant}"/>
+    <debug:print type="dict" value='${dict_constant}=={"a":97;"b":98;"c":99}'/>
+
+    <dictionary:add name="dict_constant" type="dict" key='"d"' value='100i'/>
+    <dump:_ type="dict" value="${dict_constant}"/>
+    <debug:print type="dict" value='${dict_constant}=={"a":97;"b":98;"c":99;"d":100}'/>
+
+    <dictionary:remove name="dict_constant" type="dict" key='"b"'/>
+    <dump:_ type="dict" value="${dict_constant}"/>
+    <debug:print type="dict" value='${dict_constant}=={"a":97;"c":99;"d":100}'/>
+
+    <dictionary:contains name="check" type="bool" source='${dict_constant}' key='"c"'/>
+    <print:line type="bool" value="${check}"/>
+    <debug:print type="bool" value='${check}==true'/>
+  </main>
+</program>
