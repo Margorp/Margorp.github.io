@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='url' type='string' value='"https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=2022/06/08"'/>
+    <chrome:create/>
+    <chrome:download name='html' type='string' url='${url}' timeout='30i' by='"id"' find='"mainContainer"'/>
+    <chrome:dispose/>
+
+    <html:load name='doc' type='object' html='${html}'/>
+    <html:select-nodes name='imgs' type='object' html-doc='${doc}' xpath='@//table[contains(@class,"js_racecard")]//img'/>
+    <html:get-attr-values name='srcs' type='object' html-nodes='${imgs}' attr-name='"src"'/>
+    <regexp:replace name='race_nums' type='list' input='${srcs}' pattern="@^[^\d]+(?'race_num'\d+)[^\d]+$" replacement='@${race_num}'/>
+    
+    <dump:_ type='int' value='${imgs::Count}'/>
+    <debug:print type="int" value="${imgs::Count}i>=8i"/>
+    
+    <dump:_ type='int' value='${srcs::Count}'/>
+    <debug:print type="int" value="${srcs::Count}i>=8i"/>
+    
+    <dump:_ type='list' value='${race_nums:D2}'/>
+    <debug:print type="int" value="${race_nums::Count}i>=8i"/>
+
+    <html:select-node name='root_node' type='object' html-doc='${doc}' xpath='@//html'/>
+    <html:get-outer-html name='outer_html' type='string' html-node='${root_node}'/>
+    <dump:_ type='string' value='${outer_html()::Length()}'/>
+    <debug:print type="int" value="${outer_html()::Length()}>=2000"/>
+  </main>
+</program>
