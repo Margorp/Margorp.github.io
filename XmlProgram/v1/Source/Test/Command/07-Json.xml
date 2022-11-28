@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='url' type='string' value='"https://filesamples.com/samples/code/json/sample2.json"'/>
+    <chrome:create/>
+    <chrome:download name='html' type='string' url='${url}'/>
+    <chrome:dispose/>
+
+    <html:load name='html_doc' type='object' html='${html}'/>
+    <html:select-node name="html_node" type="object" html-doc="${html_doc}" xpath="@/html/body/pre"/>
+    <html:get-inner-text name="json" type="string" html-node="${html_node}"/>
+    <dump:_ type='string' value='${json}'/>
+
+    <json:load name="json_doc" type="object" json="${json}"/>
+    <json:select-token name="first_name_token" type="object" json-doc="${json_doc}" jpath="@$.firstName"/>
+    <json:get-inner-text name="first_name" type="string" json-token="${first_name_token}"/>
+    <dump:_ type='string' value='"first_name: ${first_name}"'/>
+    <debug:print type="string" value='${first_name}=="Joe"'/>
+
+    <json:select-token name="last_name_token" type="object" json-doc="${json_doc}" jpath="@$.lastName"/>
+    <json:get-inner-text name="last_name" type="string" json-token="${last_name_token}"/>
+    <dump:_ type='string' value='"last_name: ${last_name}"'/>
+    <debug:print type="string" value='${last_name}=="Jackson"'/>
+
+    <json:select-token name="gender_token" type="object" json-doc="${json_doc}" jpath="@$.gender"/>
+    <json:get-inner-text name="gender" type="string" json-token="${gender_token}"/>
+    <dump:_ type='string' value='"gender: ${gender}"'/>
+    <debug:print type="string" value='${gender}=="male"'/>
+
+    <json:select-token name="age_token" type="object" json-doc="${json_doc}" jpath="@$.age"/>
+    <json:get-inner-text name="age" type="int" json-token="${age_token}"/>
+    <dump:_ type='string' value='"age: ${age}"'/>
+    <debug:print type="int" value='${age}==28i'/>
+
+    <json:select-token name="address_token" type="object" json-doc="${json_doc}" jpath="@$.address"/>
+    <json:get-inner-text name="address" type="string" json-token="${address_token}"/>
+    <dump:_ type='string' value='"address:"'/>
+    <dump:_ type='object' value='${address}'/>
+
+    <json:get-value name="streetAddress" type="string" attr-name='"streetAddress"' json-token="${address_token}"/>
+    <dump:_ type='string' value='"${streetAddress}"'/>
+    <debug:print type="string" value='${streetAddress}=="101"'/>
+    <json:get-value name="city" type="string" attr-name='"city"' json-token="${address_token}"/>
+    <dump:_ type='string' value='"${city}"'/>
+    <debug:print type="string" value='${city}=="San Diego"'/>
+    <json:get-value name="state" type="string" attr-name='"state"' json-token="${address_token}"/>
+    <dump:_ type='string' value='"${state}"'/>
+    <debug:print type="string" value='${state}=="CA"'/>
+
+    <json:select-token name="phone_numbers_token" type="object" json-doc="${json_doc}" jpath="@$.phoneNumbers"/>
+    <json:get-inner-text name="phone_numbers" type="object" json-token="${phone_numbers_token}"/>
+    <dump:_ type='string' value='"phone_numbers:"'/>
+    <dump:_ type='object' value='${phone_numbers}'/>
+
+    <variable:set name='first_phone_number_token' type='object' value='${phone_numbers[0]}'/>
+    <dump:_ type='object' value='${first_phone_number_token}'/>
+
+    <json:get-value name="type" type="string" attr-name='"type"' json-token="${first_phone_number_token}"/>
+    <dump:_ type='string' value='"${type}"'/>
+    <debug:print type="string" value='${type}=="home"'/>
+    <json:get-value name="number" type="string" attr-name='"number"' json-token="${first_phone_number_token}"/>
+    <dump:_ type='string' value='"${number}"'/>
+    <debug:print type="string" value='${number}=="7349282382"'/>
+    
+  </main>
+</program>
