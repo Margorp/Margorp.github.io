@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='sql' type='string' value='"SELECT meeting FROM result.meeting where meeting &gt; 20220700 and meeting &lt; 20220900;"'/>
+    <database:open-connection/>
+    <database:execute-query name='table' type='object' sql='${sql}'/>
+    <database:close-connection/>
+
+    <dump:_ type='object' value='${table}'/>
+    <debug:print type='object' value='${table[0][0]}==20220701i'/>
+    <debug:print type='object' value='${table[1][0]}==20220706i'/>
+    <debug:print type='object' value='${table[2][0]}==20220710i'/>
+    <debug:print type='object' value='${table[3][0]}==20220713i'/>
+    <debug:print type='object' value='${table[4][0]}==20220716i'/>
+
+  </main>
+</program>
