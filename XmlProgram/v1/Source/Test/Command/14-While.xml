@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name="items" type="list" value='["a","b","c","d","e"]'/>
+    <constant:set name="expected_items" type="list" value='["a","b","c","d","e"]'/>
+
+    <variable:set name='min_i' type='int' value='0i'/>
+    <variable:set name='max_i' type='int' value='${items::Count}'/>
+
+    <variable:set name='i' type='int' value='${min_i}'/>
+    <while:_ flag="${i}&lt;${max_i}">
+      <dump:_ value="${items[${i}]}"/>
+      <debug:print type="object" value='"${items[${i}]}"=="${expected_items[${i}]}"'/>
+      <variable:set name="i" type="int" value="${i+1}"/>
+    </while:_>
+  </main>
+</program>
