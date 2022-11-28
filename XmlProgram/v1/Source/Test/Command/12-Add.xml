@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+    <reference/>
+    <main>
+        <constant:set name='list_constant' type='list' value='[1,2,3,4i,5i,6i,"a","b","c"]'/>
+        <constant:set name='dict_constant' type='dict' value='{"a":97;"b":98;"c":99}'/>
+      
+        <add:list name="list_constant" type="list" value='"d"'/>
+        <dump:_ type='list' value='${list_constant}'/>
+        <debug:print type='object' value='${list_constant}==[&apos;1&apos;,&apos;2&apos;,&apos;3&apos;,4i,5i,6i,"a","b","c","d"]'/>
+        <add:dict name="dict_constant" type="dict" key='"d"' value="100i"/>
+        <dump:_ type='dict' value='${dict_constant}'/>
+        <debug:print type='object' value='${dict_constant}=={"a":97;"b":98;"c":99;"d":100}'/>
+    </main>
+</program>
