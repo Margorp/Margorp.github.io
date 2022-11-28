@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+
+    <constant:set name='url' type='string' value='"https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?RaceDate=2022/06/08"'/>
+    <regexp:replace name='year' type='int' input='${url}' pattern="@^.*=(?'year'\d+)\/(?'month'\d+)\/(?'day'\d+)$" replacement='@${year}'/>
+    <regexp:replace name='month' type='int' input='${url}' pattern="@^.*=(?'year'\d+)\/(?'month'\d+)\/(?'day'\d+)$" replacement='@${month}'/>
+    <regexp:replace name='day' type='int' input='${url}' pattern="@^.*=(?'year'\d+)\/(?'month'\d+)\/(?'day'\d+)$" replacement='@${day}'/>
+    <constant:set name='dict' type='dict' value='{}'/>
+    <dictionary:add name='dict' type='dict' key='"year"' value='${year}'/>
+    <dictionary:add name='dict' type='dict' key='"month"' value='${month}'/>
+    <dictionary:add name='dict' type='dict' key='"day"' value='${day}'/>
+    <dump:_ type='string' value='${dict}'/>
+    <debug:print type="object" value='${dict}=={"year":2022i;"month":6i;"day":8i}'/>
+
+    <constant:set name='list' type='list' value='["a1","b2","c3"]'/>
+    <regexp:replace name='list' type='list' input='${list}' pattern="@^(?'char'\w)(?'num'\d)$" replacement='@${num}${char}'/>
+    <dump:_ type='string' value='${list}'/>
+    <debug:print type="object" value='${list}==["1a","2b","3c"]'/>
+
+    <constant:set name="text" type="string" value='"A,b,C,d,E,f,G,h,I,j"'/>    
+    <regexp:match name='gp_dict' type='object' input='${text}' pattern="@^((?'chars'\w),?)*$" options='["none"]'/>
+    <dump:_ type="object" value='${gp_dict}'/>
+    <debug:print type="object" value='"${gp_dict["chars"]}"=="j"'/>
+
+    <regexp:match name='gp_dict' capture-name='cp_dict' type='object' input='${text}' pattern="@^((?'chars'\w),?)*$" options='["none"]'/>
+    <dump:_ type="object" value='${cp_dict}'/>
+    <variable:set name='chars' type='object' value='${cp_dict["chars"]}'/>
+    <debug:print type="object" value='"${chars[0]}"=="A"'/>
+
+    <constant:set name="text" type="string" value='"abc ABC abc ABC"'/>
+    <regexp:is-match name='flag' type='object' input='${text}' pattern="@^(?'words_1'[a-z]+)\s(?'words_2'[A-Z]+)\s(?'words_3'[a-z]+)\s(?'words_4'[A-Z]+)$" options='["none"]'/>
+    <dump:_ type="bool" value='${flag}'/>
+    <debug:print type="object" value='${flag}==true'/>
+
+    <regexp:matches name='match_dict' type='object' input='${text}' pattern="@(?'word'aBc)" options='["none"]'/>
+    <dump:_ type="object" value='${match_dict}'/>
+    <regexp:is-match name='is_match' type='object' input='${text}' pattern="@(?'word'aBc)" options='["none"]'/>
+    <dump:_ type="object" value='${is_match}'/>
+    <debug:print type="object" value='${is_match}==false'/>
+
+    <regexp:matches name='match_dict' type='object' input='${text}' pattern="@(?'word'aBc)" options='["ignore-case"]'/>
+    <dump:_ type="object" value='${match_dict}'/>
+    <regexp:is-match name='is_match' type='object' input='${text}' pattern="@(?'word'aBc)" options='["ignore-case"]'/>
+    <dump:_ type="object" value='${is_match}'/>
+    <debug:print type="object" value='${is_match}==true'/>
+
+  </main>
+</program>
