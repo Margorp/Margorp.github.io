@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <variable:set name="data_path" type="string" value='#{System.Environment.CurrentDirectory.ParentDirectory(3)}'/>
+
+    <variable:set name="src_path" type="string" value='"${data_path}\Data\OxfordAdvancedLearnersWords.txt"'/>
+    <text:load name="text" type="string" path="${src_path}" encoding='"utf-8"'/>
+    <dump:_ type='int' value='${text()::Length()}'/>
+    <debug:print type='int' value='${text()::Length()}==382i'/>
+
+    <variable:set name="dest_path" type="string" value='"${data_path}\Data\OxfordAdvancedLearnersWords_2.txt"'/>
+    <text:save text="${text}" path="${dest_path}" encoding='"utf-8"' overwrite='true'/>
+
+    <text:load name="text2" type="string" path="${dest_path}" encoding='"utf-8"'/>
+    <dump:_ type='string' value='${text2()::Length()}'/>
+    <debug:print type='int' value='${text2()::Length()}==382i'/>
+
+    <constant:set name="in_text" type="string" value='"abcdefgh"'/>
+    <text:to-bytes name="bytes" type="object" text='${in_text}' encoding='"utf-8"'/>
+    <dump:_ type='object' value='${bytes}'/>
+    <variable:set name="expected_bytes" type="byte-array" value="(97b,98b,99b,100b,101b,102b,103b,104b)"/>
+    <debug:print type='object' value='${bytes}==${expected_bytes}'/>
+
+    <text:from-bytes name="out_text" type="object" bytes='${bytes}' encoding='"utf-8"'/>
+    <dump:_ type='string' value='${out_text}'/>
+    <debug:print type='string' value='${out_text}=="abcdefgh"'/>
+
+    <constant:set name="numbers" type="string" value='"123456789"'/>
+    <text:reverse name="reversed_numbers" type="string" text="${numbers}"/>
+    <dump:_ type='string' value='${reversed_numbers}'/>
+    <debug:print type='string' value='${reversed_numbers}=="987654321"'/>
+
+  </main>
+</program>
