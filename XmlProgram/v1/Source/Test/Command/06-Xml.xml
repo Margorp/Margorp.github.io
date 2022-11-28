@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='url' type='string' value='"https://www.w3schools.com/xml/note.xml"'/>
+    <chrome:create/>
+    <chrome:download name='xml' type='string' url='${url}'/>
+    <chrome:dispose/>
+    <dump:_ type='int' value='${xml()::Length()}'/>
+
+    <Xml:load name="xml_doc" type="object" xml="${xml}"/>
+
+    <Xml:select-node name="note_node" type="object" xml-doc="${xml_doc}" xpath='"//note"'/>
+    <Xml:get-outer-xml name="note_outer_xml" type="string" xml-node="${note_node}"/>
+    <dump:_ type="string" value="${note_outer_xml}"/>
+
+    <Xml:select-node name="to_node" type="object" xml-doc="${xml_doc}" xpath='"//note/to"'/>
+    <Xml:get-inner-text name="to_inner_text" type="string" xml-node="${to_node}"/>
+    <dump:_ type="string" value="${to_inner_text}"/>
+    <debug:print type="string" value='${to_inner_text}=="Tove"'/>
+
+    <Xml:select-node name="from_node" type="object" xml-doc="${xml_doc}" xpath='"//note/from"'/>
+    <Xml:get-inner-text name="from_inner_text" type="string" xml-node="${from_node}"/>
+    <dump:_ type="string" value="${from_inner_text}"/>
+    <debug:print type="string" value='${from_inner_text}=="Jani"'/>
+
+    <Xml:select-node name="heading_node" type="object" xml-doc="${xml_doc}" xpath='"//note/heading"'/>
+    <Xml:get-inner-text name="heading_inner_text" type="string" xml-node="${heading_node}"/>
+    <dump:_ type="string" value="${heading_inner_text}"/>
+    <debug:print type="string" value='${heading_inner_text}=="Reminder"'/>
+
+    <Xml:select-node name="body_node" type="object" xml-doc="${xml_doc}" xpath='"//note/body"'/>
+    <Xml:get-inner-text name="body_inner_text" type="string" xml-node="${body_node}"/>
+    <dump:_ type="string" value="${body_inner_text}"/>
+    <debug:print type="string" value='${body_inner_text}=="Don&apos;t forget me this weekend!"'/>
+  </main>
+</program>
