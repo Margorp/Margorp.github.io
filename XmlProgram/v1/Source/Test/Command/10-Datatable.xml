@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='table' type='object' value='[]{}'/>
+    <dump:_ type='object' value='${table}'/>
+
+    <datatable:column-add name='table' type='object' source='${table}' column-name='"char"' column-type='"string"'/>
+    <datatable:column-add name='table' type='object' source='${table}' column-name='"ascii"' column-type='"int"'/>
+    <dump:_ type='object' value='${table}'/>
+
+    <datatable:row-add name='table' type='object' source='${table}' data-row='{"char":"a";"ascii":97i}'/>
+    <datatable:row-add name='table' type='object' source='${table}' data-row='{"char":"b";"ascii":98i}'/>
+    <datatable:row-add name='table' type='object' source='${table}' data-row='{"char":"c";"ascii":99i}'/>
+    <dump:_ type='object' value='${table}'/>
+
+    <variable:set name='a' type='object' value='${table[0][1]}'/>
+    <variable:set name='b' type='object' value='${table[1][1]}'/>
+    <variable:set name='c' type='object' value='${table[2][1]}'/>
+    <dump:_ type='object' value='${a}'/>
+    <dump:_ type='object' value='${b}'/>
+    <dump:_ type='object' value='${c}'/>
+    <debug:print type='object' value='${a}==97'/>
+    <debug:print type='object' value='${b}==98'/>
+    <debug:print type='object' value='${c}==99'/>
+
+    <datatable:row-drop name='table' type='object' source='${table}' row-index='1i'/>
+    <dump:_ type='object' value='${table}'/>
+
+    <variable:set name='a' type='object' value='${table[0][1]}'/>
+    <variable:set name='c' type='object' value='${table[1][1]}'/>
+    <dump:_ type='object' value='${a}'/>
+    <dump:_ type='object' value='${c}'/>
+    <debug:print type='object' value='${a}==97'/>
+    <debug:print type='object' value='${c}==99'/>
+
+    <datatable:select name='rows' type='object' source='${table}' select='"char = &apos;a&apos;"' filter='""'/>
+    <datatable:row-drop name='table' type='object' source='${table}' rows='${rows}'/>
+    <dump:_ type='object' value='${table}'/>
+    <variable:set name='a' type='object' value='${table[0][1]}'/>
+    <dump:_ type='object' value='${c}'/>
+    <debug:print type='object' value='${c}==99'/>
+
+  </main>
+</program>
