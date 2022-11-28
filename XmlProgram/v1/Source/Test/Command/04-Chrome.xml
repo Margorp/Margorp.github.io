@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name='url' type='string' value='"https://racing.hkjc.com/racing/information/Chinese/Racing/LocalResults.aspx?"'/>
+    <chrome:create/>
+    <chrome:download name='html' type='string' url='${url}' timeout='30i' by='"id"' find='"mainContainer"'/>
+    <chrome:extract name='js_racecard' type='string' url='${url}' timeout='30i' by='"class"' find='"js_racecard"' property='"outerHTML"'/>
+    <chrome:dispose/>
+
+    <dump:_ type='int' value='${html::Length}'/>
+    <dump:_ type='int' value='${js_racecard::Length}'/>
+    <debug:print type='int' value='${html::Length}>2000i'/>
+
+    <html:load name='doc' type='object' html='${html}'/>
+    <html:select-node name='title_node' type='object' html-doc='${doc}' xpath='@//title'/>
+    <html:get-inner-text name='title' type='string' html-node='${title_node}'/>
+    <dump:_ type='string' value='${title}'/>
+    <debug:print type='string' value='${title}=="賽果 - 賽事資料 - 賽馬資訊 - 香港賽馬會"'/>
+    
+    <html:select-nodes name='imgs' type='object' html-doc='${doc}' xpath='@//table[contains(@class,"js_racecard")]//img'/>
+    <html:get-attr-values name='srcs' type='object' html-nodes='${imgs}' attr-name='"src"'/>
+    <regexp:replace name='race_nums' type='list' input='${srcs}' pattern="@^[^\d]+(?'race_num'\d+)[^\d]+$" replacement='@${race_num}'/>
+    <dump:_ type='list' value='${race_nums:D2}'/>
+    <debug:print type='int' value='${race_nums::Count}>=8i'/>
+  </main>
+</program>
