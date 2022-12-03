@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+
+    <constant:set name="S" type="string" value='"a"'/>
+    <switch:_ name="flag" type="string" value='${S}'>
+      <case:_ name='flag' type='string' value='"a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+        <debug:print type='bool' value='"${S}"=="a"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"b"'>
+        <dump:_ type="bool" value='"${S} = b"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"c"'>
+        <dump:_ type="bool" value='"${S} = c"'/>
+      </case:_>
+      <default:_>
+        <dump:_ type="bool" value='"${S} is not a nor b nor c"'/>
+      </default:_>
+    </switch:_>
+
+    <constant:set name="S" type="string" value='"b"'/>
+    <switch:_ name="flag" type="string" value='${S}'>
+      <case:_ name='flag' type='string' value='"a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"b"'>
+        <dump:_ type="bool" value='"${S} = b"'/>
+        <debug:print type='bool' value='"${S}"=="b"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"c"'>
+        <dump:_ type="bool" value='"${S} = c"'/>
+      </case:_>
+      <default:_>
+        <dump:_ type="bool" value='"${S} is not a nor b nor c"'/>
+      </default:_>
+    </switch:_>
+
+    <constant:set name="S" type="string" value='"c"'/>
+    <switch:_ name="flag" type="string" value='${S}'>
+      <case:_ name='flag' type='string' value='"a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"b"'>
+        <dump:_ type="bool" value='"${S} = b"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"c"'>
+        <dump:_ type="bool" value='"${S} = c"'/>
+        <debug:print type='bool' value='"${S}"=="c"'/>
+      </case:_>
+      <default:_>
+        <dump:_ type="bool" value='"${S} is not a nor b nor c"'/>
+      </default:_>
+    </switch:_>
+
+    <constant:set name="S" type="string" value='"d"'/>
+    <switch:_ name="flag" type="string" value='${S}'>
+      <case:_ name='flag' type='string' value='"a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"b"'>
+        <dump:_ type="bool" value='"${S} = b"'/>
+      </case:_>
+      <case:_ name='flag' type='string' value='"c"'>
+        <dump:_ type="bool" value='"${S} = c"'/>
+      </case:_>
+      <default:_>
+        <dump:_ type="bool" value='"${S} is not a nor b nor c"'/>
+        <debug:print type='bool' value='"${S}"=="d"'/>
+      </default:_>
+    </switch:_>
+
+  </main>
+</program>
