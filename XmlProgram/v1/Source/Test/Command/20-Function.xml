@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <function:set name="circle_area" type="object">
+      <constant:set name="pi" type="object" value="3.14159f"/>
+      <variable:set name="result" type="object" value="${${r}*${r}}"/>
+      <variable:set name="result" type="object" value="${${result}*${pi}}"/>
+      <return:_ value="${result}"/>
+    </function:set>
+
+    <constant:set name='r' type='object' value='2i'/>
+    <function:call name='result' type='object' function='${circle_area}'/>
+    <dump:_ value="${result}"/>
+    <debug:print type="object" value="${result}f==12.56636f"/>
+
+    <function:set name="greeting" type="object">
+      <print:line type="string" value='"hello ${name}"'/>
+      <return:_ value='"hi ${name}"'/>
+    </function:set>
+
+    <constant:set name='name' type='string' value='"John"'/>
+    <function:call name='greeting_return_value' type='string' function='${greeting}'/>
+    <dump:_ value="${greeting_return_value}"/>
+    <debug:print type="object" value='"${greeting_return_value}"=="hi John"'/>
+
+  </main>
+</program>
