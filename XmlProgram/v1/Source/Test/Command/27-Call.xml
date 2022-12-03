@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <variable:set name="data_path" type="string" value='#{System.Environment.CurrentDirectory.ParentDirectory(3)}'/>
+
+    <variable:set name='00_Constant' type='string' value='"${data_path}\Source\Test\Command\00-Constant.xml"'/>
+    <variable:set name='01_Variable' type='string' value='"${data_path}\Source\Test\Command\01-Variable.xml"'/>
+    <variable:set name='02_List' type='string' value='"${data_path}\Source\Test\Command\02-List.xml"'/>
+    <variable:set name='03_Dictionary' type='string' value='"${data_path}\Source\Test\Command\03-Dictionary.xml"'/>
+    <variable:set name='04_Chrome' type='string' value='"${data_path}\Source\Test\Command\04-Chrome.xml"'/>
+    <variable:set name='05_Html' type='string' value='"${data_path}\Source\Test\Command\05-Html.xml"'/>
+    <variable:set name='06_Xml' type='string' value='"${data_path}\Source\Test\Command\06-Xml.xml"'/>
+    <variable:set name='07_Json' type='string' value='"${data_path}\Source\Test\Command\07-Json.xml"'/>
+    <variable:set name='08_Text' type='string' value='"${data_path}\Source\Test\Command\08-Text.xml"'/>
+    <variable:set name='09_Regex' type='string' value='"${data_path}\Source\Test\Command\09-Regex.xml"'/>
+    <variable:set name='10_Datatable' type='string' value='"${data_path}\Source\Test\Command\10-Datatable.xml"'/>
+    <variable:set name='11_Database' type='string' value='"${data_path}\Source\Test\Command\11-Database.xml"'/>
+    <variable:set name='12_Add' type='string' value='"${data_path}\Source\Test\Command\12-Add.xml"'/>
+    <variable:set name='13_For' type='string' value='"${data_path}\Source\Test\Command\13-For.xml"'/>
+    <variable:set name='14_While' type='string' value='"${data_path}\Source\Test\Command\14-While.xml"'/>
+    <variable:set name='15_Switch' type='string' value='"${data_path}\Source\Test\Command\15-Switch.xml"'/>
+    <variable:set name='16_Compare' type='string' value='"${data_path}\Source\Test\Command\16-Compare.xml"'/>
+    <variable:set name='17_If' type='string' value='"${data_path}\Source\Test\Command\17-If.xml"'/>
+    <variable:set name='18_Cryption' type='string' value='"${data_path}\Source\Test\Command\18-Cryption.xml"'/>
+    <variable:set name='19_Compression' type='string' value='"${data_path}\Source\Test\Command\19-Compression.xml"'/>
+    <variable:set name='20_Function' type='string' value='"${data_path}\Source\Test\Command\20-Function.xml"'/>
+    <variable:set name='21_Debug' type='string' value='"${data_path}\Source\Test\Command\21-Debug.xml"'/>
+    <variable:set name='22_Throw' type='string' value='"${data_path}\Source\Test\Command\22-Throw.xml"'/>
+    <variable:set name='23_Comment' type='string' value='"${data_path}\Source\Test\Command\23-Comment.xml"'/>
+    <variable:set name='24_Read' type='string' value='"${data_path}\Source\Test\Command\24-Read.xml"'/>
+    <variable:set name='25_Print' type='string' value='"${data_path}\Source\Test\Command\25-Print.xml"'/>
+    <variable:set name='26_Dump' type='string' value='"${data_path}\Source\Test\Command\26-Dump.xml"'/>
+
+    <call:program path="${00_Constant}"/>
+    <call:program path="${01_Variable}"/>
+    <call:program path="${02_List}"/>
+    <call:program path="${03_Dictionary}"/>
+    <call:program path="${04_Chrome}"/>
+    <call:program path="${05_Html}"/>
+    <call:program path="${06_Xml}"/>
+    <call:program path="${07_Json}"/>
+    <call:program path="${08_Text}"/>
+    <call:program path="${09_Regex}"/>
+    <call:program path="${10_Datatable}"/>
+    <call:program path="${11_Database}"/>
+    <call:program path="${12_Add}"/>
+    <call:program path="${13_For}"/>
+    <call:program path="${14_While}"/>
+    <call:program path="${15_Switch}"/>
+    <call:program path="${16_Compare}"/>
+    <call:program path="${17_If}"/>
+    <call:program path="${18_Cryption}"/>
+    <call:program path="${19_Compression}"/>
+    <call:program path="${20_Function}"/>
+    <call:program path="${21_Debug}"/>
+    <call:program path="${22_Throw}"/>
+    <call:program path="${23_Comment}"/>
+    <call:program path="${24_Read}"/>
+    <call:program path="${25_Print}"/>
+    <call:program path="${26_Dump}"/>
+    
+    <constant:set name="name" type="string" value='"John"'/>
+    <call:function name="greeting_return_value" type="string" program-path="${20_Function}" function-name='"greeting"'/>
+    <dump:_ value="${greeting_return_value}"/>
+    
+  </main>
+</program>
