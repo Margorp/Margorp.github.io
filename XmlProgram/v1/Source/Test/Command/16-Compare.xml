@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+    <reference/>
+    <main>
+        <constant:set name='left' type='string' value='"John"'/>
+        <constant:set name='right' type='string' value='"Mary"'/>
+        <compare:_ name='result' type='int' left='${left}' right='${right}'/>
+        <dump:_ type="int" value="${result}"/>
+        <debug:print type="int" value="${result}&lt;0i"/>
+
+        <constant:set name='left' type='int' value='5i'/>
+        <constant:set name='right' type='int' value='5i'/>
+        <compare:_ name='result' type='int' left='${left}' right='${right}'/>
+        <dump:_ type="int" value="${result}"/>
+        <debug:print type="int" value="${result}==0i"/>
+
+        <constant:set name='left' type='int' value='5i'/>
+        <constant:set name='right' type='int' value='10i'/>
+        <compare:_ name='result' type='int' left='${left}' right='${right}'/>
+        <dump:_ type="int" value="${result}"/>
+        <debug:print type="int" value="${result}&lt;0i"/>
+
+        <constant:set name='left' type='int' value='10i'/>
+        <constant:set name='right' type='int' value='5i'/>
+        <compare:_ name='result' type='int' left='${left}' right='${right}'/>
+        <dump:_ type="int" value="${result}"/>
+        <debug:print type="int" value="${result}&gt;0i"/>
+    </main>
+</program>
