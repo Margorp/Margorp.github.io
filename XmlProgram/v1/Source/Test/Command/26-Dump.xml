@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+    <reference/>
+    <main>
+        <constant:set name='char_constant' type='char' value="'a'"/>
+        <dump:_ type='char' value='${char_constant}' color='"Red"' bgcolor='"Black"'/>
+
+        <constant:set name='string_constant' type='string' value='"abc"'/>
+        <dump:_ type='string' value='${string_constant}' color='"Blue"' bgcolor='"Black"'/>
+
+        <constant:set name='int_constant' type='int' value='123i'/>
+        <dump:_ type='int' value='${int_constant}' color='"Green"' bgcolor='"Black"'/>
+
+        <constant:set name='float_constant' type='float' value='3.14f'/>
+        <dump:_ type='float' value='${float_constant}'/>
+
+        <constant:set name='bool_constant' type='bool' value='true'/>
+        <dump:_ type='bool' value='${bool_constant}'/>
+
+        <constant:set name='date_constant' type='date' value='#1997/7/1#'/>
+        <dump:_ type='date' value='${date_constant}'/>
+
+        <constant:set name='time_constant' type='time' value='#2:45:00#'/>
+        <dump:_ type='time' value='${time_constant}'/>
+
+        <constant:set name='list_constant' type='list' value='[1,2,3,"a","b","c"]'/>
+        <dump:_ type='list' value='${list_constant}'/>
+
+        <constant:set name='dict_constant' type='dict' value='{"a":97;"b":98;"c":99}'/>
+        <dump:_ type='dict' value='${dict_constant}'/>
+
+        <constant:set name='dict_constant' type='dict' value='{"a":97;"b":98;"c":99}'/>
+        <dump:_ type='dict' value='${dict_constant}'/>
+    </main>
+</program>
