@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name="name" type="string" value='"John"'/>
+    <debug:print value='${name}=="John"'/>
+    <debug:print value='${name}=="Mary"'/>
+  </main>
+</program>
