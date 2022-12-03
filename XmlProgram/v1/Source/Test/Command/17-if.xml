@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+    <reference/>
+    <main>
+
+      <if:_ name="flag" type="bool" value="1i==1i">
+        <dump:_ type="bool" value="${flag}"/>
+        <debug:print type="bool" value="${flag}==true"/>
+      </if:_>
+      <if:_ name="flag" type="bool" value='"a"=="a"'>
+        <dump:_ type="bool" value="${flag}"/>
+        <debug:print type="bool" value="${flag}==true"/>
+      </if:_>
+      <if:_ name="flag" type="bool" value='3.14f==3.14f'>
+        <dump:_ type="bool" value="${flag}"/>
+        <debug:print type="bool" value="${flag}==true"/>
+      </if:_>
+
+      <if:_ name="flag" type="bool" value="1i&lt;2i">
+        <dump:_ type="bool" value="${flag}"/>
+        <debug:print type="bool" value="${flag}==true"/>
+      </if:_>
+      <if:_ name="flag" type="bool" value='"a"&lt;"b"'>
+        <dump:_ type="bool" value="${flag}"/>
+        <debug:print type="bool" value="${flag}==true"/>
+      </if:_>
+      <if:_ name="flag" type="bool" value='3.14f&lt;3.15f'>
+        <dump:_ type="bool" value="${flag}"/>
+        <debug:print type="bool" value="${flag}==true"/>
+      </if:_>
+
+      <if:_ name="flag" type="bool" value="1i&gt;2i">
+        <dump:_ type="bool" value="${flag}"/>
+        <else:_>
+          <dump:_ type="bool" value="${flag}"/>
+          <debug:print type="bool" value="${flag}==false"/>
+        </else:_>
+      </if:_>
+      <if:_ name="flag" type="bool" value='"a"&gt;"b"'>
+        <dump:_ type="bool" value="${flag}"/>
+        <else:_>
+          <dump:_ type="bool" value="${flag}"/>
+          <debug:print type="bool" value="${flag}==false"/>
+        </else:_>
+      </if:_>
+      <if:_ name="flag" type="bool" value='3.14f&gt;3.15f'>
+        <dump:_ type="bool" value="${flag}"/>
+        <else:_>
+          <dump:_ type="bool" value="${flag}"/>
+          <debug:print type="bool" value="${flag}==false"/>
+        </else:_>
+      </if:_>
+
+      <constant:set name="S" type="string" value='"a"'/>
+      <if:_ name="flag" type="string" value='${S}=="a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+        <debug:print type="bool" value='"${S}"=="a"'/>
+        <else-if:_ name="flag" type="string" value='${S}=="b"'>
+          <dump:_ type="bool" value='"${S} = b"'/>
+        </else-if:_>
+        <else-if:_ name="flag" type="string" value='${S}=="c"'>
+          <dump:_ type="bool" value='"${S} = c"'/>
+        </else-if:_>
+      </if:_>
+
+      <constant:set name="S" type="string" value='"b"'/>
+      <if:_ name="flag" type="string" value='${S}=="a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+        <else-if:_ name="flag" type="string" value='${S}=="b"'>
+          <dump:_ type="bool" value='"${S} = b"'/>
+          <debug:print type="bool" value='"${S}"=="b"'/>
+        </else-if:_>
+        <else-if:_ name="flag" type="string" value='${S}=="c"'>
+          <dump:_ type="bool" value='"${S} = c"'/>
+        </else-if:_>
+      </if:_>
+
+      <constant:set name="S" type="string" value='"c"'/>
+      <if:_ name="flag" type="string" value='${S}=="a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+        <else-if:_ name="flag" type="string" value='${S}=="b"'>
+          <dump:_ type="bool" value='"${S} = b"'/>
+        </else-if:_>
+        <else-if:_ name="flag" type="string" value='${S}=="c"'>
+          <dump:_ type="bool" value='"${S} = c"'/>
+          <debug:print type="bool" value='"${S}"=="c"'/>
+        </else-if:_>
+      </if:_>
+
+      <constant:set name="S" type="string" value='"d"'/>
+      <if:_ name="flag" type="string" value='${S}=="a"'>
+        <dump:_ type="bool" value='"${S} = a"'/>
+        <else-if:_ name="flag" type="string" value='${S}=="b"'>
+          <dump:_ type="bool" value='"${S} = b"'/>
+        </else-if:_>
+        <else-if:_ name="flag" type="string" value='${S}=="c"'>
+          <dump:_ type="bool" value='"${S} = c"'/>
+        </else-if:_>
+        <else:_>
+          <dump:_ type="bool" value='"${S} != a or b or c"'/>
+          <debug:print type="bool" value='"${S}"=="d"'/>
+        </else:_>
+      </if:_>
+
+    </main>
+</program>
