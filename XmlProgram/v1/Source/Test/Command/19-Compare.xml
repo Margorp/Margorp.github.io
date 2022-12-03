@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name="file_path" type="string" value='"C:\Users\User\Downloads\LongmanCollocationsDictionaryAndThesaurusEnEn\LongmanCollocationsDictionaryAndThesaurusEnEn.css"'/>
+    <constant:set name="file_path" type="string" value='"../../../Data/OxfordAdvancedLearnersWords.txt"'/>
+    <constant:set name="file_path" type="string" value='"../../../Data/LongmanCollocationsDictionaryAndThesaurusEnEn.css"'/>
+    <print:_ type="string" value="${file_path}"/>
+    <print:line type="string" value='""'/>
+    
+    <text:load name="text" type="string" path="${file_path}" encoding='"utf-8"'/>    
+    <print:_ type="int" value="${text::Length}"/>
+    <print:line type="string" value='""'/>
+    <debug:print type='int' value="${text::Length}==4097i"/>
+
+    <text:to-bytes name="original_bytes" type="object" text='${text}' encoding='"utf-8"'/>
+    <print:_ type="int" value="${original_bytes::Length}"/>
+    <print:line type="string" value='""'/>
+    <debug:print type='int' value="${original_bytes::Length}==4099i"/>
+
+    <compression:lzo name="compressed_bytes" type="object" mode='compress' level='Optimal' bytes="${original_bytes}"/>
+    <print:_ type="int" value="${compressed_bytes::Length}"/>
+    <print:line type="string" value='""'/>
+    <debug:print type='int' value="${compressed_bytes::Length}==1880i"/>
+
+    <compression:lzo name="decompressed_bytes" type="object" mode='decompress' bytes="${compressed_bytes}"/>
+    <print:_ type="int" value="${decompressed_bytes::Length}"/>
+    <print:line type="string" value='""'/>
+    <debug:print type='int' value="${decompressed_bytes::Length}==4099i"/>
+
+    <text:from-bytes name="out_text" type="object" bytes='${decompressed_bytes}' encoding='"utf-8"'/>
+    <print:_ type="int" value="${out_text::Length}"/>
+    <print:line type="string" value='""'/>
+    <debug:print type='int' value="${out_text::Length}==4097i"/>
+    <print:line type="string" value='""'/>
+  </main>
+
+</program>
