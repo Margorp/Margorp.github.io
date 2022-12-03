@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <read:key name='char_variable' type='char' message='"process completed, press any key to continue..."'/>
+    <dump:_ type="string" value='"input is ${char_variable}"'/>
+
+    <read:line name='string_variable' type='string' message='"process completed, enter input and press enter to continue: "'/>
+    <dump:_ type="string" value='"input is ${string_variable}"'/>
+
+    <read:password name='string_password_variable' type='string' message='"process completed, enter password and press enter to continue: "'/>
+    <dump:_ type="string" value='"input is ${string_password_variable}"'/>
+  </main>
+</program>
