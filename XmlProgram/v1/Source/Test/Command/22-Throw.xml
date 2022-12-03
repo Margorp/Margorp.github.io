@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+
+    <constant:set name="answer" type="string" value='"John"'/>
+    
+    <read:line name="your_answer" type="string" message='"Type your name(other than John): "'/>
+    <if:_ name='flag' type='bool' value='${your_answer}!=${answer}'>
+      <throw:text name="error_message" type="string" message='"answer is not correct"' value='"answer should be ${answer}"'/>
+    </if:_>
+
+    <read:line name="your_answer" type="string" message='"Type your name(other than John): "'/>
+    <if:_ name='flag' type='bool' value='${your_answer}!=${answer}'>
+      <throw:error name="error_message" type="string" message='"answer is not correct"' value='"answer should be ${answer}"'/>
+    </if:_>
+    
+  </main>
+</program>
