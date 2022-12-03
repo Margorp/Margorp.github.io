@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+    <reference/>
+    <main>
+        <constant:set name='char_constant' type='char' value="'a'"/>
+        <print:line type='char' value='${char_constant}' color='"Red"' bgcolor='"Black"'/>
+
+        <constant:set name='string_constant' type='string' value='"abc"'/>
+        <print:line type='string' value='${string_constant}' color='"Green"' bgcolor='"Black"'/>
+
+        <constant:set name='int_constant' type='int' value='123i'/>
+        <print:line type='int' value='${int_constant}' color='"Blue"' bgcolor='"Black"'/>
+
+        <constant:set name='float_constant' type='float' value='3.14f'/>
+        <print:line type='float' value='${float_constant}' color='"Yellow"' bgcolor='"Black"'/>
+
+        <constant:set name='bool_constant' type='bool' value='true'/>
+        <print:line type='bool' value='${bool_constant}' color='"Magenta"' bgcolor='"Black"'/>
+
+        <constant:set name='date_constant' type='date' value='#1997/7/1#'/>
+        <print:line type='date' value='${date_constant}' color='"Cyan"' bgcolor='"White"'/>
+
+        <constant:set name='time_constant' type='time' value='#2:45:00#'/>
+        <print:line type='time' value='${time_constant}' color='"Red"' bgcolor='"White"'/>
+
+        <constant:set name='list_constant' type='list' value='[1,2,3,"a","b","c"]'/>
+        <print:line type='list' value='${list_constant}' color='"Blue"' bgcolor='"White"'/>
+
+        <constant:set name='dict_constant' type='dict' value='{"a":97;"b":98;"c":99}'/>
+        <print:line type='dict' value='${dict_constant}' color='"Magenta"' bgcolor='"White"'/>
+    </main>
+</program>
