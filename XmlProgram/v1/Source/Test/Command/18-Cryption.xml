@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<program version='1.0'
+>
+  <reference/>
+  <main>
+    <constant:set name="plain_text" type="string" value='"Enter text to be Encrypted"'/>
+    <constant:set name="key" type="string" value='"1234567812345678"'/>
+    <constant:set name="iv" type="string" value='"8765432187654321"'/>
+    <text:to-bytes name="bytes_key" type="object" text="${key}" encoding='"utf-8"'/>
+    <text:to-bytes name="bytes_iv" type="object" text="${iv}" encoding='"utf-8"'/>
+    <cryption:encrypt name="bytes_cipher_text" type="object" encrypt-method='"AES"' block-mode='"CBC"' padding-mode='"PKCS7"' key="${bytes_key}" iv="${bytes_iv}" key-size="128i" plain-text="${plain_text}"/>
+    <cryption:to-base64 name="cipher_text" type="string" bytes="${bytes_cipher_text}"/>
+    <dump:_ value="${cipher_text}"/>
+    <dump:_ value='${cipher_text}=="aUmOl3oDFIkhabQPFCy4kIRnzv0LGDodM/br7vJ6SPU="'/>
+    <debug:print type='string' value='"${cipher_text}"=="aUmOl3oDFIkhabQPFCy4kIRnzv0LGDodM/br7vJ6SPU="'/>
+
+    <constant:set name="plain_text" type="string" value='"Enter text to be Encrypted"'/>
+    <constant:set name="key" type="string" value='"12345678123456781234567812345678"'/>
+    <constant:set name="iv" type="string" value='"8765432187654321"'/>
+    <text:to-bytes name="bytes_key" type="object" text="${key}" encoding='"utf-8"'/>
+    <text:to-bytes name="bytes_iv" type="object" text="${iv}" encoding='"utf-8"'/>
+    <cryption:encrypt name="bytes_cipher_text" type="object" encrypt-method='"AES"' block-mode='"CBC"' padding-mode='"PKCS7"' key="${bytes_key}" iv="${bytes_iv}" key-size="256i" plain-text="${plain_text}"/>
+    <cryption:to-base64 name="cipher_text" type="string" bytes="${bytes_cipher_text}"/>
+    <dump:_ value="${cipher_text}"/>
+    <dump:_ value='${cipher_text}=="5LAo4IjvR3jdWFKBV1ROf57UGHXYI0wI8TANYDhh6pk="'/>
+    <debug:print type='string' value='"${cipher_text}"=="5LAo4IjvR3jdWFKBV1ROf57UGHXYI0wI8TANYDhh6pk="'/>
+
+<!--
+    example: C:\Users\abc\Desktop\encrypted-file.txt
+-->
+    <read:line name="path" type="string" message='"filepath: "'/>
+    <text:load name='cipher_text' type='string' path='${path}' encoding='"utf-8"'/>
+    <cryption:from-base64 name='cipher_bytes' type='object' base64='${cipher_text}'/>
+
+    <read:password name="key" type="string" message='"key: "'/>
+    <text:reverse name="iv" type="string" text='${key}'/>
+    <text:to-bytes name='key_bytes' type='object' text='${key}' encoding='"utf-8"'/>
+    <text:to-bytes name='iv_bytes' type='object' text='${iv}' encoding='"utf-8"'/>
+
+    <cryption:compute-hash name="hash_key" type="object" hash-method='"SHA512"' bytes="${key_bytes}"/>
+    <cryption:compute-hash name="hash_iv" type="object" hash-method='"SHA512"' bytes="${iv_bytes}"/>
+
+    <list:resize name="hash_key_32" type="object" size="32i" value="${hash_key}"/>
+    <list:resize name="hash_iv_16" type="object" size="16i" value="${hash_iv}"/>
+
+    <cryption:decrypt name="plain_text" type="object" encrypt-method='"AES"' block-mode='"CBC"' padding-mode='"PKCS7"' key="${hash_key_32}" iv="${hash_iv_16}" key-size="128i" cipher-bytes="${cipher_bytes}"/>
+    <dump:_ value="${plain_text}"/>
+
+    <cryption:encrypt name="cipher_bytes" type="object" encrypt-method='"AES"' block-mode='"CBC"' padding-mode='"PKCS7"' key="${hash_key_32}" iv="${hash_iv_16}" key-size="128i" plain-text="${plain_text}"/>
+    <cryption:to-base64 name="cipher_text2" type="string" bytes="${cipher_bytes}"/>
+    <dump:_ value="${cipher_text2}==${cipher_text}"/>
+
+  </main>
+</program>
